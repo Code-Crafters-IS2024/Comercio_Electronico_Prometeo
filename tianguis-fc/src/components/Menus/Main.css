@@ -1,0 +1,23 @@
+.menu-principal {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.main-view-selecter {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.main-view-selecter:hover {
+  background-color: #61dafb;
+}
+
+.menu-principal > .card {
+  margin-top: 20px;
+}

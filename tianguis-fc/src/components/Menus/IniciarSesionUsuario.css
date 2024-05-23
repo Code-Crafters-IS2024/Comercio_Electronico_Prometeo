@@ -1,0 +1,41 @@
+.sign-in-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.sign-in-section h2 {
+  font-size: 1.5em;
+}
+
+.sign-in-section label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.sign-in-section input[type="text"],
+.sign-in-section input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 20px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sign-in-section button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sign-in-section button:hover {
+  background-color: #61dafb;
+}
+
+.sign-in-section > div {
+  margin-bottom: 20px;
+}

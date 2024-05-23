@@ -1,0 +1,24 @@
+.register-section {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.register-section h2 {
+  font-size: 1.5em;
+}
+
+.register-section label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.register-section .nuevo-comprador,
+.register-section .nuevo-vendedor {
+  margin-top: 20px;
+}
+
+.register-section > .card {
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  margin-bottom: 20px;
+}

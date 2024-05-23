@@ -1,0 +1,20 @@
+.filtro-vistas-usuario {
+  text-align: center;
+  margin-top: 20px; /* Ajusta este valor según sea necesario */
+}
+
+.filtro-vistas-usuario button {
+  margin: 0 10px; /* Espacio entre botones */
+  padding: 10px 20px; /* Ajusta el padding según sea necesario */
+  font-size: 1.2em; /* Tamaño de fuente */
+  background-color: #282c34; /* Color de fondo */
+  color: white; /* Color de texto */
+  border: none; /* Sin borde */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.filtro-vistas-usuario button:hover {
+  background-color: #61dafb; /* Color de fondo al pasar el ratón */
+}

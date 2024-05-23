@@ -1,0 +1,45 @@
+.nuevo-comprador__controls {
+  text-align: center;
+}
+
+.nuevo-comprador__control {
+  margin-bottom: 15px;
+}
+
+.nuevo-comprador__control label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.nuevo-comprador__control input[type="text"],
+.nuevo-comprador__control input[type="email"],
+.nuevo-comprador__control input[type="password"],
+.nuevo-comprador__control input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.nuevo-comprador__control input[type="radio"] {
+  margin-right: 5px;
+}
+
+.nuevo-comprador__actions {
+  margin-top: 20px;
+}
+
+.nuevo-comprador__actions button {
+  padding: 10px 20px;
+  font-size: 1.2em;
+  background-color: #282c34;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.nuevo-comprador__actions button:hover {
+  background-color: #61dafb;
+}
