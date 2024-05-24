@@ -53,7 +53,7 @@ const AgregarProducto = () => {
                 <div>
                     <label>Id Vendedor:</label>
                     <input
-                        type="text"
+                        type="number"
                         name="id_vendedor"
                         value={formData.id_vendedor}
                         onChange={handleChange}
