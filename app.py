@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, url_for, request, flash, session, jsonify
 from alch.models.Modelo_Producto import ModeloProducto
+from alch.alchemyClasses.producto import Producto
 from controller.catalogue import catalogue
 from authenticate import authenticate_user
 
