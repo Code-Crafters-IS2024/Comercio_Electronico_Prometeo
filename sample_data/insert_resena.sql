@@ -6,7 +6,7 @@ insert into resena (id_producto, id_comprador, comentario, calificacion) values 
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (50, 79, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (12, 3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (31, 46, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4);
-insert into resena (id_producto, id_comprador, comentario, calificacion) values (45, 100, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
+insert into resena (id_producto, id_comprador, comentario, calificacion) values (45, 99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (19, 18, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (96, 90, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (33, 38, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
@@ -27,7 +27,7 @@ insert into resena (id_producto, id_comprador, comentario, calificacion) values 
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (41, 26, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (83, 48, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (98, 36, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1);
-insert into resena (id_producto, id_comprador, comentario, calificacion) values (100, 68, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2);
+insert into resena (id_producto, id_comprador, comentario, calificacion) values (99, 68, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (3, 54, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (42, 50, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (25, 33, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
@@ -50,7 +50,7 @@ insert into resena (id_producto, id_comprador, comentario, calificacion) values 
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (7, 67, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 1);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (2, 87, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (55, 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4);
-insert into resena (id_producto, id_comprador, comentario, calificacion) values (40, 100, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
+insert into resena (id_producto, id_comprador, comentario, calificacion) values (40, 99, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (91, 22, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (53, 9, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (66, 4, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
@@ -63,7 +63,7 @@ insert into resena (id_producto, id_comprador, comentario, calificacion) values 
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (27, 79, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (51, 87, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (64, 32, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 5);
-insert into resena (id_producto, id_comprador, comentario, calificacion) values (100, 23, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
+insert into resena (id_producto, id_comprador, comentario, calificacion) values (99, 23, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 3);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (19, 28, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (71, 27, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 4);
 insert into resena (id_producto, id_comprador, comentario, calificacion) values (4, 28, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.', 2);
