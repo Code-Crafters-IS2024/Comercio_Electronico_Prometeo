@@ -6,6 +6,7 @@ import IniciarSesionUsuario from "./IniciarSesionUsuario";
 import Start from "./Start";
 import Home from "./Home";
 import Logout from "./Logout";
+import ModificarProductos from "../ModificarProductos/ModificarProductos";
 
 //Main con rutas de navegacion y sus respectivos componentes 
 const Main = () => {
@@ -15,6 +16,7 @@ const Main = () => {
                 <Route path="/login" Component={IniciarSesionUsuario}></Route>
                 <Route path="/home" Component={Home}></Route>
                 <Route path="/logout" Component={Logout}/>
+                <Route path="/modificarproducto" Component={ModificarProductos}></Route>
              </Routes>);
 
 };
