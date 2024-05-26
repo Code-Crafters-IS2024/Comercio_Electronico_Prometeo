@@ -72,5 +72,14 @@ def add_product():
 
         ModeloProducto.agregar(new_product)
         return jsonify({"message": "Producto agregado con éxito", "product": new_product.id_producto}), 201
+    
+@app.route("/api/view_prods")
+def view_prods():
+    data = ModeloProducto.query_all()
+    dict = {}
+    for d in data:
+        dict[d.get("id_producto")] = d
+    return jsonify({"meddage":"Productos consultados exitosamente", "data":data}), 201
+
 if __name__ == '__main__':
     app.run()

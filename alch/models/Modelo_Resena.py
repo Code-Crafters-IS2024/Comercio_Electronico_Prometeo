@@ -35,3 +35,21 @@ class ModeloResena():
             print(e)
             return False
         return True
+    """
+    Obtiene todas las reseñas registradas para un producto
+
+    Params
+    ------
+    id_producto : id del producto cuyas reseñas se consultan
+
+    Returns
+    -------
+    data : query conteniendo las reseñas
+    """
+    def obtener_resenas_producto(id_producto):
+        data = None
+        try:
+            data = Resena.query.filter_by(id_producto = id_producto)
+        except Exception as e:
+            print(e)
+        return data

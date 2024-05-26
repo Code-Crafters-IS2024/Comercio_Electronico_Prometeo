@@ -15,3 +15,12 @@ class ModeloProducto():
         except Exception as e:
             print(e)
         return data
+
+    def query_all():
+        data = None
+        try:
+            data = Producto.query.all()
+        except Exception as e:
+            print(e)
+        return data
+        
