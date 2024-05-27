@@ -8,14 +8,14 @@ class Producto(db.Model):
     costo = Column(Float, nullable=False)
     categoria = Column(String(100), nullable=False)
     #Imagen
-    foto = Column(LargeBinary)#Longblob
+    imagen = Column(LargeBinary)#Longblob
     unidades = Column(Integer, nullable=False)
     def __init__(self, id_vendedor, descripcion, costo, categoria, foto, unidades):
         self.id_vendedor = id_vendedor
         self.descripcion = descripcion
         self.costo = costo
         self.categoria = categoria
-        self.foto = foto
+        self.imagen = foto
         self.unidades = unidades
     def __str__(self):
         return f'Nombre:{self.id_producto} {self.descripcion}\n'
