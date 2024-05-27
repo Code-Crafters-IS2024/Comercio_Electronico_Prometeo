@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, url_for, request, flash, session, jsonify
 from alch.models.Modelo_Producto import ModeloProducto
 from alch.alchemyClasses.producto import Producto
+from alch.models.Modelo_Vendedor import ModeloVendedor
 from controller.catalogue import catalogue
 from authenticate import authenticate_user
 
@@ -75,11 +76,21 @@ def add_product():
     
 @app.route("/api/view_prods")
 def view_prods():
-    data = ModeloProducto.query_all()
+    data = Producto.query.all()
     dict = {}
     for d in data:
-        dict[d.get("id_producto")] = d
-    return jsonify({"meddage":"Productos consultados exitosamente", "data":data}), 201
+        prod_data = {}
+        
+        id_vendedor = d.id_vendedor
+        vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
+
+        prod_data["vendedor"] = vendedor.nombres
+        prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
+        prod_data["precio"] = d.costo
+        prod_data["unidades"] = d.unidades
+
+        dict[d.id_producto] = prod_data
+    return jsonify({"meddage":"Productos consultados exitosamente", "data":dict}), 201
 
 if __name__ == '__main__':
     app.run()
