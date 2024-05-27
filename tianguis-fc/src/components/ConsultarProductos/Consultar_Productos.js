@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 /**
- * Componente para terminar la sesion
+ * Componente para consultar todos los productos disponibles
  * @returns 
  */
 const Consultar_Producto = () =>
@@ -16,6 +16,10 @@ const Consultar_Producto = () =>
   }, []);
 
   
-  console.log(data);
+  return(
+    <div>
+      hi
+    </div>
+  )
 }
 export default Consultar_Producto;
