@@ -18,6 +18,7 @@ class ModeloComprador():
         db.session.add(comprador)
         db.session.commit()
         return True
+    
     def agregar_comprador2(cuenta, nombre, apPat, apMat, telefono, email, genero, profile_picture, password):
         comprador = Comprador(cuenta, nombre, apPat, apMat, telefono, email, genero, profile_picture, password)
         db.session.add(comprador)

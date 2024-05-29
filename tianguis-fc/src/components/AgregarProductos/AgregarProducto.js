@@ -32,18 +32,19 @@ const AgregarProducto = () => {
         for (const key in formData) {
             data.append(key, formData[key]);
         }
-
         await fetch('/api/add_product', {
             method: 'POST',
             body: data
         }).then((response) => response.json())
           .then((data) => {
               console.log(data);
-              alert("Producto agregado con éxito");
-          })
-          .catch((error) => {
-              console.error("Error:", error);
-          });
+              alert(data.message);
+              if (data.message == "Producto agregado con éxito"){
+                window.location.href = "/"
+              }
+          }).catch((error) => {
+            console.error("Error:", error);
+        });
     };
 
     return (
@@ -117,4 +118,3 @@ const AgregarProducto = () => {
 };
 
 export default AgregarProducto;
-                               

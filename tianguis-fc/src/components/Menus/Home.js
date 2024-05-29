@@ -21,6 +21,7 @@ const Home = () =>
     <div>
         Estas logeado!!
         <a href="/logout">Cerrar sesión</a>
+        <a href="/AgregarProducto">Agregar Producto</a>
     </div>);
 
 }
