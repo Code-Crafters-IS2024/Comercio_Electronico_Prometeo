@@ -2,7 +2,7 @@ from sqlalchemy import Column, Float, Integer, LargeBinary, String
 from alch.alchemyClasses import db
 class Producto(db.Model):
     __tablename__ = 'producto'
-    id_producto = Column(Integer,nullable=False, autoincrement=True, primary_key = True)
+    id_producto = Column(Integer,nullable=False, autoincrement=True, primary_key=True)
     id_vendedor = Column(Integer)
     descripcion = Column(String(300), nullable=False)#Not null
     costo = Column(Float, nullable=False)
