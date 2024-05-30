@@ -1,6 +1,9 @@
 from flask import Flask, redirect, render_template, url_for, request, flash, session, jsonify
 from alch.models.Modelo_Producto import ModeloProducto
 from alch.models.Modelo_Vendedor import ModeloVendedor
+from alch.models.Modelo_Compra import ModeloCompra
+from alch.models.Modelo_Encuentro import ModeloEncuentro
+
 from controller.catalogue import catalogue
 from authenticate import authenticate_user
 
@@ -80,7 +83,7 @@ def get_product(id):
     product = ModeloProducto.obtener_producto(id)
     if product:
         product_data = {
-            'id': product.id,
+            'id': product.id_producto,
             'id_vendedor': product.id_vendedor,
             'descripcion': product.descripcion,
             'costo': product.costo,
@@ -91,28 +94,33 @@ def get_product(id):
         return jsonify(product_data), 200
     return jsonify({"message": "Producto no encontrado"}), 404
 
-@app.route('/api/get_compras_vendedor/<int:id_vendedor>', methods=['GET'])
-def get_compras_vendedor(id_vendedor):
-    compras = ModeloCompra.obtener_compras_por_vendedor(id_vendedor)
-    return jsonify([compra.to_dict() for compra in compras]), 200
+@app.route('/api/get_compras/<int:id_vendedor>', methods=['GET', 'POST'])
+def get_compras(id_vendedor):
+    #print("Obteniendo compras")
+    compras = ModeloCompra.obtener_compras(id_vendedor)
+    #print(compras)
+    return jsonify([ModeloCompra.to_dict(compra) for compra in compras]), 200
 
 @app.route('/api/get_compra/<int:id>', methods=['GET'])
 def get_compra(id):
+    print("GET COMPRA")
     compra = ModeloCompra.obtener_compra(id)
     if compra:
-        return jsonify(compra.to_dict()), 200
+        return jsonify(ModeloCompra.to_dict(compra)), 200
     return jsonify({"message": "Compra no encontrada"}), 404
 
 @app.route('/api/crear_encuentro', methods=['POST'])
 def crear_encuentro():
     data = request.json
+    print(data)
     if ModeloEncuentro.crear_encuentro(data):
         return jsonify({"message": "Encuentro creado con éxito"}), 201
     return jsonify({"message": "Error al crear el encuentro"}), 400
 
 @app.route('/api/get_encuentros/<int:id>', methods=['GET'])
 def get_encuentros(id):
+    print("encuentros por id: ", id)
     encuentros = ModeloEncuentro.obtener_encuentros(id)
-    return jsonify([encuentro.to_dict() for encuentro in encuentros]), 200
+    return jsonify([ModeloEncuentro.to_dict(encuentro) for encuentro in encuentros]), 200
 if __name__ == '__main__':
     app.run()

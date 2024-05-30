@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
-const ListarEncuentros = ({ id }) => {
+const ListarEncuentros = () => {
+    const { id } = useParams();
     const [encuentros, setEncuentros] = useState([]);
 
     useEffect(() => {
-        fetch('/api/get_encuentros/${id}')
+	console.log(`ID: ${id}`);
+        fetch(`/api/get_encuentros/${id}`)
             .then(response => response.json())
             .then(data => setEncuentros(data))
             .catch(error => console.error('Error:', error));

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 const ListarCompras = ({ idVendedor }) => {
     const [compras, setCompras] = useState([]);
-
+    const { id } = useParams();
+    
     useEffect(() => {
-        fetch(`/api/get_compras/${idVendedor}`)
+        fetch(`/api/get_compras/${id}`)
             .then(response => response.json())
             .then(data => setCompras(data))
             .catch(error => console.error('Error:', error));
-    }, [idVendedor]);
+    }, [id]);
 
     return (
         <div>

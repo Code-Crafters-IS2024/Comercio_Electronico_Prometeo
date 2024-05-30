@@ -7,6 +7,7 @@ const EstablecerEncuentro = () => {
     const [formData, setFormData] = useState({
         id_comprador: '',
         id_vendedor: '',
+	id_compra: '',
         lugar: '',
         fecha: '',
         hora: ''
@@ -14,6 +15,7 @@ const EstablecerEncuentro = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+	console.log(`${id_compra}`);
         fetch(`/api/get_compra/${id_compra}`)
             .then(response => response.json())
             .then(data => {
@@ -21,7 +23,8 @@ const EstablecerEncuentro = () => {
                 setFormData({
                     ...formData,
                     id_comprador: data.id_comprador,
-                    id_vendedor: data.id_vendedor
+                    id_vendedor: data.id_vendedor,
+		    id_compra: id_compra
                 });
             })
             .catch(error => console.error('Error:', error));
