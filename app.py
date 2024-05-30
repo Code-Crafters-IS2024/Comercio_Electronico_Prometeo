@@ -98,17 +98,16 @@ def view_prods():
 def get_prod():
     data = {}
     try:
-        id_producto = request.form.get("id_producto")
+        id_producto = request.args.get('id_producto')
         data_producto = ModeloProducto.consultar_producto(id_producto)
-        resenas_producto = ModeloResena.obtener_resenas_producto(id_producto)
 
-        id_vendedor = data_producto["id_vendedor"]
+        id_vendedor = data_producto.id_vendedor
         data_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
 
         dict_vendedor = {}
         dict_vendedor["nombres"] = data_vendedor.nombres
-        dict_vendedor["apPat"] = data_vendedor.apPat
-        dict_vendedor["apMat"] = data_vendedor.apMat
+        dict_vendedor["apPat"] = data_vendedor.ap_pat
+        dict_vendedor["apMat"] = data_vendedor.ap_mat
 
         data["vendedor"] = dict_vendedor
 
@@ -121,7 +120,7 @@ def get_prod():
 
         data["producto"] = dict_prod
     except Exception as e:
-        print("Algo salio mal")
+        print("Algo salio mal " + str(e))
         return jsonify({"message":str(e), "data" : data}), 404
     
     return jsonify({"message": "Datos de producto recuperados con exito", "data":data}), 201

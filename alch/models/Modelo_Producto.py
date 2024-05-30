@@ -14,7 +14,7 @@ class ModeloProducto():
         try:
             data = Producto.query.filter_by(id_producto = id_producto).first()
         except Exception as e:
-            print(e)
+            print("No se encontro el producto" + str(e))
         return data
 
     def query_all():

@@ -8,13 +8,15 @@ import "./ConsultarProductos.css";
  */
 const Producto_Individual = () =>
 {
-    let { id } = useParams();
-        id = parseInt(id);
+    let { id_producto } = useParams();
 
     const [data, setData] = useState({});
 
   useEffect(() => {
-      fetch("/api/get_prod?id_producto="+"01")
+      fetch(`/api/get_prod?id_producto=${encodeURIComponent(id_producto)}`, 
+      {
+        method: "GET"
+      })
           .then(response => response.json())
           .then(data => setData(data))
           .catch(error => console.error('Error fetching data:', error));
@@ -33,9 +35,11 @@ const Producto_Individual = () =>
     return null;
   }
 
+  console.log(data)
+
   return(
     <div className="productos-grid">
-      hello
+      {producto.vendedor.nombres}
     </div>
   )
 }
