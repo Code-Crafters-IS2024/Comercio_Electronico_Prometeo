@@ -1,6 +1,7 @@
 from flask import Flask, redirect, render_template, url_for, request, flash, session, jsonify
 from alch.models.Modelo_Producto import ModeloProducto
 from alch.alchemyClasses.producto import Producto
+from alch.alchemyClasses.resena import Resena
 from alch.models.Modelo_Vendedor import ModeloVendedor
 from alch.models.Modelo_Resena import ModeloResena
 from alch.models.Modelo_Comprador import ModeloComprador
@@ -76,6 +77,9 @@ def add_product():
         ModeloProducto.agregar(new_product)
         return jsonify({"message": "Producto agregado con éxito", "product": new_product.id_producto}), 201
     
+"""
+Obtiene la informacion simplificada de todos los productos
+"""
 @app.route("/api/view_prods")
 def view_prods():
     data = Producto.query.all()
@@ -86,6 +90,7 @@ def view_prods():
         id_vendedor = d.id_vendedor
         vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
 
+        prod_data["id_producto"] = d.id_producto
         prod_data["vendedor"] = vendedor.nombres
         prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
         prod_data["precio"] = d.costo
@@ -94,6 +99,9 @@ def view_prods():
         dict[d.id_producto] = prod_data
     return jsonify({"message":"Productos consultados exitosamente", "data":dict}), 201
 
+"""
+API para obtener la informacion de un producto por ID. Incluye toda la informacion del producto y datos basicos del vendedor
+"""
 @app.route('/api/get_prod', methods=['GET'])
 def get_prod():
     data = {}
@@ -105,6 +113,7 @@ def get_prod():
         data_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
 
         dict_vendedor = {}
+        dict_vendedor["id_vendedor"] = data_vendedor.id_vendedor
         dict_vendedor["nombres"] = data_vendedor.nombres
         dict_vendedor["apPat"] = data_vendedor.ap_pat
         dict_vendedor["apMat"] = data_vendedor.ap_mat
@@ -124,6 +133,40 @@ def get_prod():
         return jsonify({"message":str(e), "data" : data}), 404
     
     return jsonify({"message": "Datos de producto recuperados con exito", "data":data}), 201
+
+
+"""
+Obtiene la informacion simplificada de todos los productos
+"""
+@app.route("/api/view_resenas_prod", methods=['GET'])
+def view_resenas_prod():
+    
+    dict = {}
+
+    try:
+        id_producto = request.args.get('id_producto')
+        data = ModeloResena.obtener_resenas_producto(id_producto)
+
+        for d in data:
+            res_data = {}
+            
+            id_comprador= d.id_comprador
+            comprador = ModeloComprador.obtener_comprador(id_comprador)
+
+            res_data["id_resena"] = d.id_resena
+            res_data["id_producto"] = d.id_producto
+            res_data["id_comprador"] = d.id_comprador
+            res_data["nombres"] = comprador.nombres
+            res_data["comentario"] = d.comentario
+            res_data["calificacion"] = d.calificacion
+
+            dict[d.id_resena] = res_data
+
+    except Exception as e:
+        print("Algo salio mal" + str(e))
+        return jsonify({"message": str(e), "data":None}), 404
+    
+    return jsonify({"message":"Resenas consultados exitosamente", "data":dict}), 201
 
 if __name__ == '__main__':
     app.run()
