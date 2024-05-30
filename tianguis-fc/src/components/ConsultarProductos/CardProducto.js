@@ -1,4 +1,4 @@
-const CardProduct = ({data}, esVendedor = false) =>
+const CardProduct = ({data, id}, esVendedor = false) =>
 {
     return (<div>
         <label>Nombre del producto</label>
@@ -8,7 +8,7 @@ const CardProduct = ({data}, esVendedor = false) =>
             <br></br><label>Disponibles: {data.unidades}</label>
           </div>
           <div>
-            <a href="">Ver Detalles</a>
+            <a href={`/productos/producto/${id}`}>Ver Detalles</a>
             {esVendedor?
                 <a href="">Modificar</a>
                 :

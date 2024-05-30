@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams} from 'react-router-dom';
 import CardProduct from "./CardProducto";
 import "./ConsultarProductos.css";
+import CardProdDetailed from "./CardProdDetailed";
 /**
  * Componente para consultar todos los productos disponibles
  * @returns 
@@ -39,7 +40,7 @@ const Producto_Individual = () =>
 
   return(
     <div className="productos-grid">
-      {producto.vendedor.nombres}
+      <CardProdDetailed data={producto} id={id_producto}/>
     </div>
   )
 }
