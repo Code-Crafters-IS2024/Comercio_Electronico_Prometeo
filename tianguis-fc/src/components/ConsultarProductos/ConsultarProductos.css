@@ -107,6 +107,8 @@
     transform: scale(1.1);
 }
 
+/* Colores para los distintos botones*/
+
 .detalles
 {
     color: #0099ff;
@@ -137,4 +139,19 @@
 {
     color:goldenrod;
     border-color: goldenrod;
+}
+
+
+/* Reseñas */
+
+.resenas-list
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.resena-card
+{
+    display: flex;
+    flex-direction: column;
 }

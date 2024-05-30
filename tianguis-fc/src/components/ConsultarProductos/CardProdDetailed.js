@@ -31,7 +31,7 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
                 <div className="product-info">
                     <h1>Nombre del Producto</h1>
 
-                    <label className="producto-calificacion">{calificacion} ({data.producto.calificacion.toFixed(1)})</label>
+                    <label><label  className="producto-calificacion">{calificacion}</label> ({data.producto.calificacion.toFixed(1)})</label>
                     <label>{data.producto.categoria}</label>
                     <label>Ofrecido por {data.vendedor.nombres} {data.vendedor.apPat} {data.vendedor.apMat}</label>
                     <label className="product-description" >{data.producto.descripcion}</label>

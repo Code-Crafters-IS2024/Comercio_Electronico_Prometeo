@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import Resena from "./CardResena";
 
+/**
+ * Componente que muestra una lista de todas las reseñas disponibles para un producto dado
+ * @param {*} id id del producto cuyas reseñas se quieren obtener
+ * @returns 
+ */
 const Resenas = ({id}) =>
 {
     const [data, setData] = useState({});
@@ -30,7 +35,7 @@ const Resenas = ({id}) =>
   console.log(resenas)
 
   return(
-    <div className="productos-grid">
+    <div className="resenas-list">
       {Object.keys(resenas).map((key) => (
         <div key={key}>
           <Resena data={resenas[key]} id={key}/>

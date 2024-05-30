@@ -1,12 +1,31 @@
+
+/**
+ * Componente de una reseña individual
+ * @param {*} data Datos de la reseña 
+ * @returns 
+ */
 const Resena = ({data}) =>
 {
+    let calificacion = ""
+
+    //Genera la calificacion como estrellas usando caracteres ascii
+    for(let i = 0; i < 5; i++)
+    {
+        if(i < data.calificacion - 0.5)
+        {
+            calificacion += "★"
+        }
+        else
+        {
+            calificacion += "☆"
+        }
+    }
+
     return(
-        <div>
-            <label>Usuario: {data.nombres}</label>
-            <br></br>
-            <label>Calificacion: {data.calificacion}</label>
-            <br></br>
-            <label>Contenido: {data.comentario}</label>
+        <div className="resena-card">
+            <h1 className="resenar">{calificacion}</h1>
+            <label className="product-description">{data.comentario}</label>
+            <label>{data.nombres}</label>
         </div>
     )
 }
