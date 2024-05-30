@@ -168,6 +168,9 @@ def view_resenas_prod():
     
     return jsonify({"message":"Resenas consultados exitosamente", "data":dict}), 201
 
+"""
+API para registrar una nueva reseña
+"""
 @app.route("/api/resena/agregar", methods=['POST'])
 def agregar_resena():
     try:
@@ -185,6 +188,37 @@ def agregar_resena():
         return jsonify({"message":str(e)}), 401
     
     return jsonify({"message" : "Producto agregado exitosamente"}), 201
+
+"""
+API para obtener la reseña que un usuario ha escrito para un producto dado
+"""
+@app.route("/api/resena/obtener_comprador_prod", methods=['GET'])
+def obtener_resena_comprador_producto():
+    data = None
+    try:
+        id_producto = request.args.get("id_producto")
+        id_comprador = session["user_id"]
+
+        resena = ModeloResena.obtener_resena_usuario_prod(id_comprador, id_producto)
+
+        ##Si no hay reseñas para este producto, devolver nada exitosamente
+        if resena is None:
+            return jsonify({"message" : "No hay datos", "data":data}), 201        
+
+        res = {}
+
+        res["id_resena"] = resena.id_resena
+        res["calificacion"] = resena.calificacion
+        res["id_comprador"] = resena.id_comprador
+        res["id_producto"] = resena.id_producto
+        res["comentario"] = resena.comentario
+
+        data = res
+    except Exception as e:
+        print(e)
+        return jsonify({"message":str(e), "data":None}), 404
+    return jsonify({"message" : "Reseña consultada exitosamente", "data":data}), 201
+
 
 if __name__ == '__main__':
     app.run()

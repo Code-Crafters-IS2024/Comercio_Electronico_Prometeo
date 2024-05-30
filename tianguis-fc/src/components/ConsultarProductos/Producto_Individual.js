@@ -44,10 +44,12 @@ const Producto_Individual = () =>
   return(
     <div>
       <CardProdDetailed data={producto} id={id_producto} esVendedor={esVendedor}/>
-      <h3>Reseñas</h3>
+      <div className="resena-box">
+
+      <Resenas id={id_producto}/>
       {!esVendedor &&
       <CrearResena id_producto={id_producto}/>}
-      <Resenas id={id_producto}/>
+      </div>
     </div>
   )
 }

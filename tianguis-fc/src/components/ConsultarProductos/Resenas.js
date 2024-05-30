@@ -36,6 +36,7 @@ const Resenas = ({id}) =>
 
   return(
     <div className="resenas-list">
+      <h1>Reseñas</h1>
       {Object.keys(resenas).map((key) => (
         <div key={key}>
           <Resena data={resenas[key]} id={key}/>

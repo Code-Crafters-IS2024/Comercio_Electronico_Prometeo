@@ -1,8 +1,12 @@
 from sqlalchemy import delete
 from alch.alchemyClasses.resena import Resena
 from alch.alchemyClasses import db
+from sqlalchemy import and_
 
 class ModeloResena():
+    """
+    Agrega una reseña a los registros
+    """
     def agregar_resena(data):
         try:
             db.session.add(data)
@@ -45,3 +49,15 @@ class ModeloResena():
         except Exception as e:
             print(e)
         return data
+    
+    """
+    Obtiene la reseña que un usuario ha escrito para un producto dado
+    """
+    def obtener_resena_usuario_prod(id_comprador, id_producto):
+        data = None
+        try:
+            data = Resena.query.filter(and_(Resena.id_producto == id_producto, Resena.id_comprador == id_comprador)).first()
+        except Exception as e:
+            print(e)
+        return data
+        
