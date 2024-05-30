@@ -33,8 +33,7 @@ const Consultar_Producto = () =>
     <div className="productos-grid">
       {Object.keys(productos).map((key) => (
         <div key={key}>
-          <CardProduct data={productos[key]} id={key}/>
-          <br></br><br></br>
+          <CardProduct data={productos[key]} id={key} esVendedor={false}/>
         </div>
       ))}
     </div>

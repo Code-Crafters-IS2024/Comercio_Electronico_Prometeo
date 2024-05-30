@@ -1,0 +1,112 @@
+.productos-grid
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product
+{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+
+    margin: 10px;
+
+    box-shadow: 2px 2px 2px lightgray;
+    padding: 10px;
+}
+
+.product-info-panel
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.product-info
+{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+    margin-left: 10px;
+}
+
+.product-image
+{
+    width: 200px;
+    height: 200px;
+    background-color: lightgray;
+    align-items: center;
+}
+
+.product-name
+{
+    font-size: x-large;
+}
+
+.producto-calificacion
+{
+    color:goldenrod;
+    font-size: x-large;
+}
+
+.product-buttons
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.product-nav-button
+{
+    display: block;
+    text-decoration: none;
+
+    border: 2px solid grey;
+    color: gray;
+    border-radius: 50px;
+
+    padding: 5px;
+    margin: 5px;
+
+    transition: 0.1s;
+}
+
+.product-nav-button:hover
+{
+    transform: scale(1.1);
+}
+
+.detalles
+{
+    color: #0099ff;
+    border-color: #0099ff;
+}
+
+.modificar
+{
+    color: #36df77;
+    border-color: #36df77;
+}
+
+.eliminar
+{
+    color: crimson;
+    border-color: crimson;
+}
+
+.comprar
+{
+    color: white;
+    background-color: goldenrod;
+    border-color: goldenrod;
+    
+}
+
+.resenar
+{
+    color:goldenrod;
+    border-color: goldenrod;
+}
