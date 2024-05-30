@@ -41,13 +41,13 @@ const CardProduct = ({data, id, esVendedor}) =>
                 <div className="product-buttons">
                     {/* Dependiendo del usuario, mostrar botones para modificar/eliminar el producto o comprar/reseñar */}
                     {esVendedor?
-                        <a href="" className="product-nav-button eliminar">Eliminar</a>
+                        <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
                         :
                         <a href="" className="product-nav-button comprar"><b>Comprar</b></a>
                     }
 
                     {esVendedor &&
-                    <a href="" className="product-nav-button modificar">Modificar</a>
+                    <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button modificar">Modificar</a>
                     }
 
                     <a href={`/productos/producto/${id}`} className="product-nav-button detalles">Ver Detalles</a>

@@ -43,12 +43,12 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
                 </div>
                 <div className="product-buttons">
                 {esVendedor?
-                    <a href="" className="product-nav-button modificar">Modificar</a>
+                    <a href={`/path/a/modificar?id_producto=${id}`} className="product-nav-button modificar">Modificar</a>
                     :
                     <a href="" className="product-nav-button comprar">Comprar</a>
                 }
                 {esVendedor &&
-                    <a href="" className="product-nav-button eliminar">Eliminar</a>
+                    <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
                 }
                 </div>
             </div>

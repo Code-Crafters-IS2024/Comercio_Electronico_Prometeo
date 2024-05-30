@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+/**
+ * Renderiza un form para crear o modificar una reseña, tomando en cuenta si el usuario ya ha 
+ * escrito una o no
+ * @param {*} id_producto : id del producto de la reseña
+ * @returns 
+ */
 const CrearResena = ({id_producto}) =>
 {
 

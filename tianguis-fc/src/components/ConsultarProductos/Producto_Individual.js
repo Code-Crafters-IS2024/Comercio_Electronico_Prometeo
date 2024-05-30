@@ -6,17 +6,19 @@ import CardProdDetailed from "./CardProdDetailed";
 import Resenas from "./Resenas";
 import CrearResena from "./CrearResena";
 /**
- * Componente para consultar todos los productos disponibles
+ * Componente para consultar la informacion de un producto individual
  * @returns 
  */
 const Producto_Individual = () =>
 {
-    let { id_producto } = useParams();
+  //Determinar si el usuario es comprador o vendedor
+  let esVendedor = false;
 
-    const [data, setData] = useState({});
+  let { id_producto } = useParams();
 
-    //Determinar si el usuario es comprador o vendedor
-    let esVendedor = false;
+  const [data, setData] = useState({});
+
+    
 
   useEffect(() => {
       fetch(`/api/get_prod?id_producto=${encodeURIComponent(id_producto)}`, 

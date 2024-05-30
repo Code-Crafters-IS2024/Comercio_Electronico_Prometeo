@@ -2,12 +2,15 @@ import { useEffect, useState } from "react";
 import CardProduct from "./CardProducto";
 import "./ConsultarProductos.css";
 /**
- * Componente para consultar todos los productos disponibles
+ * Componente para consultar todos los productos disponibles en forma de lista
  * @returns 
  */
 const Consultar_Producto = () =>
 {
-    const [data, setData] = useState({});
+  //Cambiar por chequeo para determinar tipo de usuario
+  let esVendedor = false;
+
+  const [data, setData] = useState({});
 
   useEffect(() => {
       fetch("/api/view_prods")
@@ -33,7 +36,7 @@ const Consultar_Producto = () =>
     <div className="productos-grid">
       {Object.keys(productos).map((key) => (
         <div key={key}>
-          <CardProduct data={productos[key]} id={key} esVendedor={false}/>
+          <CardProduct data={productos[key]} id={key} esVendedor={esVendedor}/>
         </div>
       ))}
     </div>
