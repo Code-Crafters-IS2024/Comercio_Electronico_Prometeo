@@ -2,6 +2,8 @@ from flask import Flask, redirect, render_template, url_for, request, flash, ses
 from alch.models.Modelo_Producto import ModeloProducto
 from alch.alchemyClasses.producto import Producto
 from alch.models.Modelo_Vendedor import ModeloVendedor
+from alch.models.Modelo_Resena import ModeloResena
+from alch.models.Modelo_Comprador import ModeloComprador
 from controller.catalogue import catalogue
 from authenticate import authenticate_user
 
@@ -90,7 +92,39 @@ def view_prods():
         prod_data["unidades"] = d.unidades
 
         dict[d.id_producto] = prod_data
-    return jsonify({"meddage":"Productos consultados exitosamente", "data":dict}), 201
+    return jsonify({"message":"Productos consultados exitosamente", "data":dict}), 201
+
+@app.route('/api/get_prod', methods=['GET'])
+def get_prod():
+    data = {}
+    try:
+        id_producto = request.form.get("id_producto")
+        data_producto = ModeloProducto.consultar_producto(id_producto)
+        resenas_producto = ModeloResena.obtener_resenas_producto(id_producto)
+
+        id_vendedor = data_producto["id_vendedor"]
+        data_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
+
+        dict_vendedor = {}
+        dict_vendedor["nombres"] = data_vendedor.nombres
+        dict_vendedor["apPat"] = data_vendedor.apPat
+        dict_vendedor["apMat"] = data_vendedor.apMat
+
+        data["vendedor"] = dict_vendedor
+
+        dict_prod = {}
+        dict_prod["descripcion"] = data_producto.descripcion
+        dict_prod["costo"] = data_producto.costo
+        dict_prod["unidades"] = data_producto.unidades
+        dict_prod["calificacion"] = ModeloProducto.calificacion_promedio(id_producto)
+        dict_prod["categoria"] = data_producto.categoria
+
+        data["producto"] = dict_prod
+    except Exception as e:
+        print("Algo salio mal")
+        return jsonify({"message":str(e), "data" : data}), 404
+    
+    return jsonify({"message": "Datos de producto recuperados con exito", "data":data}), 201
 
 if __name__ == '__main__':
     app.run()
