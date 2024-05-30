@@ -91,5 +91,28 @@ def get_product(id):
         return jsonify(product_data), 200
     return jsonify({"message": "Producto no encontrado"}), 404
 
+@app.route('/api/get_compras_vendedor/<int:id_vendedor>', methods=['GET'])
+def get_compras_vendedor(id_vendedor):
+    compras = ModeloCompra.obtener_compras_por_vendedor(id_vendedor)
+    return jsonify([compra.to_dict() for compra in compras]), 200
+
+@app.route('/api/get_compra/<int:id>', methods=['GET'])
+def get_compra(id):
+    compra = ModeloCompra.obtener_compra(id)
+    if compra:
+        return jsonify(compra.to_dict()), 200
+    return jsonify({"message": "Compra no encontrada"}), 404
+
+@app.route('/api/crear_encuentro', methods=['POST'])
+def crear_encuentro():
+    data = request.json
+    if ModeloEncuentro.crear_encuentro(data):
+        return jsonify({"message": "Encuentro creado con éxito"}), 201
+    return jsonify({"message": "Error al crear el encuentro"}), 400
+
+@app.route('/api/get_encuentros/<int:id>', methods=['GET'])
+def get_encuentros(id):
+    encuentros = ModeloEncuentro.obtener_encuentros(id)
+    return jsonify([encuentro.to_dict() for encuentro in encuentros]), 200
 if __name__ == '__main__':
     app.run()
