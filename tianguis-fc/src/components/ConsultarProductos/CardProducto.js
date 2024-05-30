@@ -5,8 +5,20 @@ const CardProduct = ({data}, esVendedor = false) =>
         <div>
             <br></br><label>Vendedor: {data.vendedor}</label>
             <br></br><label>Calificacion: {data.calificacion.toFixed(1)}</label>
-            <br></br><label>Precio: ${data.precio} MXN</label>
             <br></br><label>Disponibles: {data.unidades}</label>
+          </div>
+          <div>
+            <a href="">Ver Detalles</a>
+            {esVendedor?
+                <a href="">Modificar</a>
+                :
+                <a href="">Comprar</a>
+            }
+            {esVendedor?
+                <a href="">Eliminar</a>
+                :
+                <a href="">Reseñar</a>
+            }
           </div>
     </div>
     );
