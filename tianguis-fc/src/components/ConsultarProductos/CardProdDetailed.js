@@ -1,32 +1,58 @@
-const CardProdDetailed = ({data, id}, esVendedor = false) =>
+
+/**
+ * 
+ * @param {*} param0 
+ * @param {*} esVendedor 
+ * @returns 
+ */
+const CardProdDetailed = ({data, id, esVendedor}) =>
 {
+    let calificacion = ""
+
+    //Genera la calificacion como estrellas usando caracteres ascii
+    for(let i = 0; i < 5; i++)
+    {
+        if(i < data.producto.calificacion - 0.5)
+        {
+            calificacion += "★"
+        }
+        else
+        {
+            calificacion += "☆"
+        }
+    }
+
     return(
-        <div>
-            <div className="info">
-                <label>Vendedor: {data.vendedor.nombres} {data.vendedor.apPat} {data.vendedor.apMat}</label>
-                <br></br>
-                <label>Descripcion: {data.producto.descripcion}</label>
-                <br></br>
-                <label>Categoria: {data.producto.categoria}</label>
-                <br></br>
-                <label>Costo: {data.producto.costo}</label>
-                <br></br>
-                <label>Calificacion: {data.producto.calificacion.toFixed(1)}</label>
-                <br></br>
-                <label>Unidades: {data.producto.unidades}</label>
-                
+        <div className="product detailed">
+            <div className="product-image">
+
             </div>
-            <div>
-            {esVendedor?
-                <a href="" className="product-nav-button">Modificar</a>
-                :
-                <a href="" className="product-nav-button">Comprar</a>
-            }
-            {esVendedor?
-                <a href="" className="product-nav-button">Eliminar</a>
-                :
-                <a href="" className="product-nav-button">Reseñar</a>
-            }
+            <div className="product-info-panel">
+                <div className="product-info">
+                    <h1>Nombre del Producto</h1>
+
+                    <label className="producto-calificacion">{calificacion} ({data.producto.calificacion.toFixed(1)})</label>
+                    <label>{data.producto.categoria}</label>
+                    <label>Ofrecido por {data.vendedor.nombres} {data.vendedor.apPat} {data.vendedor.apMat}</label>
+                    <label className="product-description" >{data.producto.descripcion}</label>
+                    
+                    <div className="producto-unidad-precio">
+                        <label>{data.producto.unidades} Unidades disponibles</label>
+                        <label className="producto-precio">${data.producto.costo} MXN</label>
+                    </div>
+                </div>
+                <div className="product-buttons">
+                {esVendedor?
+                    <a href="" className="product-nav-button modificar">Modificar</a>
+                    :
+                    <a href="" className="product-nav-button comprar">Comprar</a>
+                }
+                {esVendedor?
+                    <a href="" className="product-nav-button eliminar">Eliminar</a>
+                    :
+                    <a href="" className="product-nav-button resenar">Reseñar</a>
+                }
+                </div>
             </div>
         </div>
     )

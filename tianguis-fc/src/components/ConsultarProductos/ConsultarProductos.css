@@ -17,6 +17,12 @@
     padding: 10px;
 }
 
+.detailed
+{
+    justify-content: center;
+    flex-shrink: 1;
+}
+
 .product-info-panel
 {
     display: flex;
@@ -40,11 +46,26 @@
     height: 200px;
     background-color: lightgray;
     align-items: center;
+    align-self: center;
 }
 
 .product-name
 {
     font-size: x-large;
+}
+
+.producto-precio
+{
+    font-size: xx-large;
+}
+
+.producto-unidad-precio
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 15px;
 }
 
 .producto-calificacion
@@ -53,10 +74,17 @@
     font-size: x-large;
 }
 
+.product-description
+{
+    font-size: xx-large;
+    margin: 20px;
+}
+
 .product-buttons
 {
     display: flex;
     flex-direction: row;
+    justify-content: flex-end;
 }
 
 .product-nav-button

@@ -41,7 +41,7 @@ const Producto_Individual = () =>
 
   return(
     <div>
-      <CardProdDetailed data={producto} id={id_producto}/>
+      <CardProdDetailed data={producto} id={id_producto} esVendedor={true}/>
       <h3>Reseñas</h3>
       <Resenas id={id_producto}/>
     </div>
