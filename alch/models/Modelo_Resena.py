@@ -5,15 +5,7 @@ from alch.alchemyClasses import db
 class ModeloResena():
     def agregar_resena(data):
         try:
-            canBeReviewed = True
-            idProd = data.get("id_producto")
-            idComp = data.get("id_comprador")
-            comentario = data.get("comentario")
-            calificacion = data.get("calificacion")
-
-            resena = Resena(idProd, idComp, comentario, calificacion)
-
-            db.session.add(resena)
+            db.session.add(data)
             db.session.commit()
         except Exception as e:
             print(e)

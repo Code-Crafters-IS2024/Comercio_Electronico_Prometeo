@@ -168,5 +168,23 @@ def view_resenas_prod():
     
     return jsonify({"message":"Resenas consultados exitosamente", "data":dict}), 201
 
+@app.route("/api/resena/agregar", methods=['POST'])
+def agregar_resena():
+    try:
+        id_producto = request.form.get('id_producto')
+        id_comprador = session['user_id']
+        calificacion = request.form.get('calificacion')
+        comentario = request.form.get('comentario')
+
+        resena = Resena(id_producto, id_comprador, comentario, calificacion)
+
+        ModeloResena.agregar_resena(resena)
+
+    except Exception as e:
+        print(e)
+        return jsonify({"message":str(e)}), 401
+    
+    return jsonify({"message" : "Producto agregado exitosamente"}), 201
+
 if __name__ == '__main__':
     app.run()

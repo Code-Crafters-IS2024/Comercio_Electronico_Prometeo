@@ -83,8 +83,8 @@
 .product-buttons
 {
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 }
 
 .product-nav-button
