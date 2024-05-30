@@ -100,6 +100,9 @@
     margin: 5px;
 
     transition: 0.1s;
+
+    user-select: none;
+    cursor: pointer;
 }
 
 .product-nav-button:hover

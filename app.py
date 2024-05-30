@@ -219,6 +219,30 @@ def obtener_resena_comprador_producto():
         return jsonify({"message":str(e), "data":None}), 404
     return jsonify({"message" : "Reseña consultada exitosamente", "data":data}), 201
 
+@app.route("/api/resena/eliminar", methods=['GET'])
+def eliminar_resena():
+    try:
+        id_resena = request.args.get("id_resena")
+        ModeloResena.eliminar_resena(id_resena)
+    except Exception as e:
+        print(e)
+        return jsonify({"message":str(e)}), 401
+    
+    return jsonify({"message" : "Reseña eliminada exitosamente"}), 201
+
+@app.route("/api/resena/modificar", methods=['POST'])
+def modificar_resena():
+    try:
+        id_producto = request.form.get('id_resena')
+        calificacion = request.form.get('calificacion')
+        comentario = request.form.get('comentario')
+
+        ModeloResena.modificar_resena(id_producto, {"comentario" : comentario, "calificacion":calificacion})
+    except Exception as e:
+        print("Algo salio mal al modificar la reseña: " + str(e))
+        return jsonify({"message":str(e)}), 401
+    
+    return jsonify({"message" : "Reseña modificada exitosamente"}), 201
 
 if __name__ == '__main__':
     app.run()

@@ -5,7 +5,8 @@ const CrearResena = ({id_producto}) =>
 
     //Determinar si el usuario ha escrito una reseña para este producto
     const [data, setData] = useState({});
-
+    
+    //Obtener reseña del usuario para este producto
     useEffect(() => {
         fetch(`/api/resena/obtener_comprador_prod?id_producto=${encodeURIComponent(id_producto)}`, 
         {
@@ -16,11 +17,11 @@ const CrearResena = ({id_producto}) =>
             .catch(error => console.error('Error fetching data:', error));
     }, []);
 
-    console.log(data)
     //FUnciones de form
 
     async function sendFormData(formData) {
-        await fetch('/api/resena/agregar', {
+        let direction = data.data ? `/api/resena/modificar` : 'api/resena/agregar'
+        await fetch(direction, {
           method: 'POST',
           body: formData
         })
@@ -41,29 +42,47 @@ const CrearResena = ({id_producto}) =>
         formData.append('calificacion', calificacion)
         formData.append('comentario', comentario)
 
+        if(data.data)
+        {
+            formData.append('id_resena', data.data.id_resena)
+        }
+
         await sendFormData(formData);
 
         window.location.reload();
     }
 
-    const defaultComentario = data.data ? {value : data.data.comentario} : { placeholder : "Escribe aqui lo que piensas de este prducto"}
-    const defaultCalificacion = data.data ? {value : data.data.calificacion} : { placeholder: 3}
+    //Eliminar reseña
+    async function delete_resena()
+    {
+        await fetch(`/api/resena/eliminar?id_resena=${data.data.id_resena}`, {
+            method: 'GET',
+          })
+          .then((response) => response.json())
+          window.location.reload();
+    }
+
+    //Si hay una reseña escrita por el usuario, usar sus valores en el forms. de otro modo usar placeholders
+    const defaultComentario = data.data ? {defaultValue : data.data.comentario} : { placeholder : "Escribe aqui lo que piensas de este prducto"}
+    const defaultCalificacion = data.data ? {defaultValue : data.data.calificacion} : { placeholder: 3}
 
         return(
             <form onSubmit={submitHandler} className="resena-form">
-
-                <h3>Cuentanos lo que piensas de este producto</h3>
+                <h3>{data.data?
+                "Esto es lo que piensas de este producto":
+                "Cuentanos lo que piensas de este producto"
+                }</h3>
                 <textarea 
                 {...defaultComentario}
                 name="comentario" className="resena-textbox" rows="7"></textarea>
                 <div>
-                <label for="calificacion">Calificación:</label> <input type="number" min={0} max={5} 
+                <label htmlFor="calificacion">Calificación:</label> <input type="number" min={0} max={5} 
                 {...defaultCalificacion}
                 name="calificacion" required></input>
                 </div>
                 <button type="submit">{data.data ? "Actualizar reseña" : "Subir Reseña"}</button>
                 {data.data && 
-                <a href="" className="product-nav-button eliminar" >Eliminar Reseña</a>}
+                <a onClick={delete_resena} className="product-nav-button eliminar" >Eliminar Reseña</a>}
             </form>
         )
 }
