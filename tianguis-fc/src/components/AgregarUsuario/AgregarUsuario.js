@@ -51,7 +51,7 @@ const AgregarUsuario = () => {
               if (data.success) {
                   navigate('/');
               } else {
-                  alert('Error al agregar el usuario');
+                  alert(data.message);
               }
           });
     };

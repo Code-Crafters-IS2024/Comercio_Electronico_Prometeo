@@ -357,11 +357,17 @@ def agregar_usuario():
     tipo_usuario = data.get('tipo_usuario')
     profile_picture = request.files['foto'].read() if 'foto' in request.files else None
     if tipo_usuario == 'comprador':
-        if ModeloComprador.agregar_comprador(data, profile_picture):
-            return jsonify({"success": True, "message": "Comprador registrado exitosamente"}), 201
+        if not ModeloComprador.obtener_comprador(data.get("numero_cuenta")):
+            if ModeloComprador.agregar_comprador(data, profile_picture):
+                return jsonify({"success": True, "message": "Comprador registrado exitosamente"}), 201
+        else:
+            return jsonify({"success": False, "message": "Numero de cuenta ya existente"}), 202
     elif tipo_usuario == 'vendedor':
-        if ModeloVendedor.agregar_vendedor(data, profile_picture):
-            return jsonify({"success": True, "message": "Vendedor registrado exitosamente"}), 201
+        if not ModeloVendedor.obtener_vendedor_cuenta(data.get("numero_cuenta")):
+            if ModeloVendedor.agregar_vendedor(data, profile_picture):
+                return jsonify({"success": True, "message": "Vendedor registrado exitosamente"}), 201
+        else:
+            return jsonify({"success": False, "message": "Numero de cuenta ya existente"}), 202
     return jsonify({"success": False, "message": "Error al registrar el usuario"}), 400
 if __name__ == '__main__':
     app.run()
