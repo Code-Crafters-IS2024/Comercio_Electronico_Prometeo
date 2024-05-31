@@ -3,7 +3,7 @@ from alch.alchemyClasses.vendedor import Vendedor
 from alch.alchemyClasses import db
 
 class ModeloVendedor():
-    def agregar_vendedor(data):
+    def agregar_vendedor(data, foto):
         cuenta = data.get("numero_cuenta")
         nombre = data.get("nombres")
         apPat = data.get("ap_pat")
@@ -11,7 +11,7 @@ class ModeloVendedor():
         telefono = data.get("num_telefono")
         email = data.get("correo")
         genero = data.get("genero")
-        profile_picture = data.get("foto")
+        profile_picture = foto
         password = data.get("password")
 
         vendedor = Vendedor(cuenta, nombre, apPat, apMat, telefono, email, genero, profile_picture, password)

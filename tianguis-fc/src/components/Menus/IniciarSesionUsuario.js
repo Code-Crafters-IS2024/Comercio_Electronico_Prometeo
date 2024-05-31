@@ -4,6 +4,8 @@ import Card from "../UI/Card";
 import FiltroVistasUsuario from "./FiltroVistasUsuario";
 import { Navigate } from "react-router";
 import LoginStatus from "../Utils/FetchLogIn";
+import { Link } from 'react-router-dom';
+
 const IniciarSesionUsuario = (props) => {
 
     let logStatus = LoginStatus();
@@ -21,11 +23,11 @@ const IniciarSesionUsuario = (props) => {
     //Hacer fetch al back end para determinar si los datos son correctos
     async function sendFormData(formData) {
         await fetch('/api/login', {
-          method: 'POST',
-          body: formData
+            method: 'POST',
+            body: formData
         })
-        .then((response) => response.json())
-      }
+            .then((response) => response.json())
+    }
 
     //Submit
     async function submitHandler(event){
@@ -61,23 +63,28 @@ const IniciarSesionUsuario = (props) => {
                     <div>
                         <label>Número de cuenta:</label>
                         <input 
-                        type="text"
-                        required
-                        name="username"
+                            type="text"
+                            required
+                            name="username"
                         />
                     </div>
                     <div>
                         <label>Contraseña:</label>
                         <input
-                        type="password"
-                        required
-                        name="password"
+                            type="password"
+                            required
+                            name="password"
                         />
                     </div>
                     <div>
                         <button type="submit">Iniciar Sesión</button>
                     </div>
                 </form>
+		<div>
+                    <Link to="/agregar_usuario">
+                        <button type="button">Agregar Usuario</button>
+                    </Link>
+                </div>
             </Card>
         </div>
     );

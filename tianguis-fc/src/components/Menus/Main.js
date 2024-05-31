@@ -14,7 +14,7 @@ import ListarCompras from "../Compras/ListarCompras";
 import CompraInfo from "../Compras/Compra";
 import EstablecerEncuentro from "../Compras/EstablecerEncuentro";
 import ListarEncuentros from "../Compras/ListarEncuentros";
-
+import AgregarUsuario from "../AgregarUsuario/AgregarUsuario"
 //Main con rutas de navegacion y sus respectivos componentes 
 const Main = () => {
 
@@ -31,6 +31,7 @@ const Main = () => {
                 <Route path="/compra/:id" element={<CompraInfo />} />
                 <Route path="/crear_encuentro/:id_compra" element={<EstablecerEncuentro />} />
                 <Route path="/ver_encuentros/:id" element={<ListarEncuentros />} />
+		<Route path="/agregar_usuario" Component={AgregarUsuario}></Route>
              </Routes>);
 
 };

@@ -335,6 +335,17 @@ def get_encuentros(id):
     print("encuentros por id: ", id)
     encuentros = ModeloEncuentro.obtener_encuentros(id)
     return jsonify([ModeloEncuentro.to_dict(encuentro) for encuentro in encuentros]), 200
-
+@app.route('/api/agregar_usuario', methods=['POST'])
+def agregar_usuario():
+    data = request.form
+    tipo_usuario = data.get('tipo_usuario')
+    profile_picture = request.files['foto'].read() if 'foto' in request.files else None
+    if tipo_usuario == 'comprador':
+        if ModeloComprador.agregar_comprador(data, profile_picture):
+            return jsonify({"success": True, "message": "Comprador registrado exitosamente"}), 201
+    elif tipo_usuario == 'vendedor':
+        if ModeloVendedor.agregar_vendedor(data, profile_picture):
+            return jsonify({"success": True, "message": "Vendedor registrado exitosamente"}), 201
+    return jsonify({"success": False, "message": "Error al registrar el usuario"}), 400
 if __name__ == '__main__':
     app.run()
