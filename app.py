@@ -220,6 +220,7 @@ def agregar_resena():
     try:
         id_producto = request.form.get('id_producto')
         id_comprador = session['user_id']
+        id_comprador = ModeloComprador.obtener_comprador(id_comprador).id_comprador
         calificacion = request.form.get('calificacion')
         comentario = request.form.get('comentario')
 
@@ -242,7 +243,7 @@ def obtener_resena_comprador_producto():
     try:
         id_producto = request.args.get("id_producto")
         id_comprador = session["user_id"]
-
+        id_comprador = ModeloComprador.obtener_comprador(id_comprador).id_comprador
         resena = ModeloResena.obtener_resena_usuario_prod(id_comprador, id_producto)
 
         ##Si no hay reseñas para este producto, devolver nada exitosamente

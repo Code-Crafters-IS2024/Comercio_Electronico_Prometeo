@@ -1,5 +1,7 @@
 from alch.alchemyClasses.encuentro import Encuentro
 from alch.alchemyClasses import db
+from alch.models.Modelo_Comprador import ModeloComprador
+from alch.models.Modelo_Vendedor import ModeloVendedor
 
 class ModeloEncuentro():
     def crear_encuentro(data):
@@ -15,9 +17,21 @@ class ModeloEncuentro():
         return True
     def obtener_encuentros(id):
         try:
-            data1 = Encuentro.query.filter_by(id_vendedor=id).all()
-            data2 = Encuentro.query.filter_by(id_comprador=id).all()
-            return data1 + data2
+            vendedor = ModeloVendedor.obtener_vendedor(id)
+            comprador = ModeloComprador.obtener_comprador(id)
+            if vendedor:                
+                data1 = Encuentro.query.filter_by(id_vendedor=vendedor.id_vendedor).all()
+            if comprador:
+                data2 = Encuentro.query.filter_by(id_comprador=comprador.id_comprador).all()
+            if vendedor and comprador:
+                return data1 + data2
+            elif vendedor:
+                return data1
+            elif comprador:
+                return data2
+            else:
+                return None
+            
         except Exception as e:
             print("Error:", str(e))
         return []
