@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router";
 import { NavLink, Route, Routes } from 'react-router-dom';
 
+import LoginStatus from "../Utils/FetchLogIn";
 import "./agregar_prod.css";
 
 const AgregarProducto = () => {
@@ -12,6 +14,18 @@ const AgregarProducto = () => {
         foto: null,
         unidades: ''
     });
+
+    let login = LoginStatus();
+
+    if(login == null)
+    {
+        return null
+    }
+
+    if(!login.logged || login.type != "vendedor")
+    {
+        return <Navigate to="/"/>
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -54,16 +68,6 @@ const AgregarProducto = () => {
             <h2>Agregar Producto</h2>
             <form onSubmit={handleSubmit}>
                 <div className="prod_form">
-                <div className="prod_field">
-                    <label>Id Vendedor:</label>
-                    <input
-                        type="number"
-                        name="id_vendedor"
-                        value={formData.id_vendedor}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
                 <div className="prod_field">
                     <label>Descripción:</label>
                     <textarea
