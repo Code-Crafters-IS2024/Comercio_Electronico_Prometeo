@@ -134,6 +134,19 @@ def get_prod():
     
     return jsonify({"message": "Datos de producto recuperados con exito", "data":data}), 201
 
+"""
+Borra un producto y todas las reseñas asociadas con el
+"""
+@app.route("/api/producto/eliminar", methods=['GET'])
+def eliminar_producto():
+    try:
+        id_producto = request.args.get("id_producto")
+        ModeloProducto.delete_product(id_producto)
+    except Exception as e:
+        print(e)
+        return jsonify({"message": str(e)}), 401
+
+    return jsonify({"message": "Reseña eliminada exitosamente"}), 201
 
 """
 Obtiene la informacion simplificada de todos los productos
@@ -243,6 +256,7 @@ def modificar_resena():
         return jsonify({"message":str(e)}), 401
     
     return jsonify({"message" : "Reseña modificada exitosamente"}), 201
+
 
 if __name__ == '__main__':
     app.run()
