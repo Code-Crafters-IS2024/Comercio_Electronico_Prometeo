@@ -41,7 +41,7 @@ class ModeloProducto():
                 db.session.delete(resena)
                 db.session.commit()
             except Exception as e:
-            print("Algo salió mal al eliminar el registro de alguna reseña asociada al producto: " + str(e))
+                print("Algo salió mal al eliminar el registro de alguna reseña asociada al producto: " + str(e))
             return False
         # Una vez hacemos eso podemos borrar el producto
         producto = Producto.query.get(id_producto)

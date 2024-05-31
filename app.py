@@ -68,18 +68,13 @@ def add_product():
     if request.method == 'POST':
         data = request.form
         foto = request.files['foto'].read() if 'foto' in request.files else None
+        id_vendedor = data.get('id_vendedor')
+        if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
+            return jsonify({"message": "No existe el vendedor"}), 201
+        ModeloProducto.agregar_producto(data, foto)
+        return jsonify({"message": "Producto agregado con éxito"}), 201
+    return jsonify({"message": "Producto no agregado con éxito"}), 201
 
-        new_product = Producto(
-            id_vendedor=data.get('id_vendedor'),
-            descripcion=data.get('descripcion'),
-            costo=data.get('costo'),
-            categoria=data.get('categoria'),
-            #foto=foto,
-            unidades=data.get('unidades')
-        )
-
-        ModeloProducto.agregar(new_product)
-        return jsonify({"message": "Producto agregado con éxito", "product": new_product.id_producto}), 201
     
 """
 Obtiene la informacion simplificada de todos los productos
@@ -260,13 +255,6 @@ def modificar_resena():
         return jsonify({"message":str(e)}), 401
     
     return jsonify({"message" : "Reseña modificada exitosamente"}), 201
-
-        id_vendedor = data.get('id_vendedor')
-        if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
-            return jsonify({"message": "No existe el vendedor"}), 201
-        ModeloProducto.agregar_producto(data, foto)
-        return jsonify({"message": "Producto agregado con éxito"}), 201
-    return jsonify({"message": "Producto no agregado con éxito"}), 201
 
 @app.route('/api/update_product/<int:id>', methods=['POST'])
 def update_product(id):
