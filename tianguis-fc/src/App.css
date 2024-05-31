@@ -28,6 +28,22 @@
   color: #61dafb;
 }
 
+.nav-button:hover{
+  transform: scale(1.1);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  background: #36df77;
+  color: black;
+  border: none;
+}
+
+.cerrar:hover{
+  transform: scale(1.1);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5);
+  background: crimson;
+  color: black;
+  border: none;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
