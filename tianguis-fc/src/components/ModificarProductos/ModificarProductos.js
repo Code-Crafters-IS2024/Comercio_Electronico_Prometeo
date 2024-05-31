@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
+import "./mod.css"
 const ModificarProducto = () => {
     const { id } = useParams();
     const navigate = useNavigate();

@@ -23,3 +23,10 @@
 textarea {
     resize: none;
   }
+
+  .add-product-section
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
