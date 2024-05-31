@@ -105,13 +105,10 @@ def view_prods():
         return jsonify({"message":"Por favor inicia sesion"}),403
     
     if session['user_type'] == "vendedor":
-        print("vendedir")
         id_vendedor = ModeloVendedor.obtener_vendedor(session['user_id']).id_vendedor
         data = ModeloProducto.productos_vendedor(id_vendedor)
     elif session['user_type'] == "comprador":
-        print("Comprador")
         data = Producto.query.all()
-    print(data)
     if not data:
         return jsonify({"message" : "No hay productos registrados", "data" : None}), 404
         
@@ -184,7 +181,7 @@ def eliminar_producto():
         id_producto = request.args.get("id_producto")
         producto = ModeloProducto.obtener_producto(id_producto)
         
-        if session['user_id'] != str(producto.id_vendedor):
+        if session['user_id'] != producto.id_vendedor:
             return jsonify({"message": "No puedes eliminar este producto"}), 404
         ModeloProducto.delete_product(id_producto)
     except Exception as e:
