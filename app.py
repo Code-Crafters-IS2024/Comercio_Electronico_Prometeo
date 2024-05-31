@@ -32,28 +32,34 @@ def hello_world():
 
 @app.route('/api/login', methods=['GET','POST'])
 def login():
-    if session.get('user_id') != None:
+    if session.get('user_id') != None and session.get('user_type') != None:
         return jsonify({
             "logged" : True,
-            "user" : session['user_id']
+            "user" : session['user_id'],
+            "type" : session['user_type']
             })
     if request.method == 'GET':
         return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
     name = request.form.get('username')
     passwd = request.form.get('password')
-    if authenticate_user(name, passwd):
+    typeOfUser = authenticate_user(name, passwd)
+    if typeOfUser is not None:
 
         session['user_id'] = name #definición de cookie de sesión.
+        session['user_type'] = typeOfUser
         return jsonify({
             "logged" : True,
-            "user" : session['user_id']
+            "user" : session['user_id'],
+            "type" : session['user_type']
             })
 
     else:
         return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
     
 
