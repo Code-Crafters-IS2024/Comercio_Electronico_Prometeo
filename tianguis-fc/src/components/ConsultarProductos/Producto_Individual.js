@@ -5,20 +5,19 @@ import "./ConsultarProductos.css";
 import CardProdDetailed from "./CardProdDetailed";
 import Resenas from "./Resenas";
 import CrearResena from "./CrearResena";
+import { Navigate } from "react-router";
+import LoginStatus from "../Utils/FetchLogIn";
 /**
  * Componente para consultar la informacion de un producto individual
  * @returns 
  */
 const Producto_Individual = () =>
 {
-  //Determinar si el usuario es comprador o vendedor
-  let esVendedor = true;
-
   let { id_producto } = useParams();
 
   const [data, setData] = useState({});
 
-    
+  let login = LoginStatus();
 
   useEffect(() => {
       fetch(`/api/get_prod?id_producto=${encodeURIComponent(id_producto)}`, 
@@ -29,6 +28,19 @@ const Producto_Individual = () =>
           .then(data => setData(data))
           .catch(error => console.error('Error fetching data:', error));
   }, []);
+
+  if(login == null)
+  {
+    return null;
+  }
+
+  if(!login.logged)
+  {
+    return <Navigate to="/login"/>;
+  }
+
+  //Cambiar por chequeo para determinar tipo de usuario
+  let esVendedor = login.type == "vendedor";
 
   if(data == null)
   {

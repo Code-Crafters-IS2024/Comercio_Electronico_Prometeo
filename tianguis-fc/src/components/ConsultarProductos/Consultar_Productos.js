@@ -1,24 +1,37 @@
+import { Navigate } from "react-router";
 import { useEffect, useState } from "react";
 import CardProduct from "./CardProducto";
 import "./ConsultarProductos.css";
+import LoginStatus from "../Utils/FetchLogIn";
 /**
  * Componente para consultar todos los productos disponibles en forma de lista
  * @returns 
  */
 const Consultar_Producto = () =>
 {
-  //Cambiar por chequeo para determinar tipo de usuario
-  let esVendedor = true;
+  let login = LoginStatus();
 
   const [data, setData] = useState({});
-
   useEffect(() => {
-      fetch("/api/view_prods")
-          .then(response => response.json())
-          .then(data => setData(data))
-          .catch(error => console.error('Error fetching data:', error));
-  }, []);
+    fetch("/api/view_prods")
+        .then(response => response.json())
+        .then(data => setData(data))
+        .catch(error => console.error('Error fetching data:', error));
+    }, []); 
 
+  if(login == null)
+  {
+    return null;
+  }
+
+  if(!login.logged)
+  {
+    return <Navigate to="/login"/>;
+  }
+
+  //Cambiar por chequeo para determinar tipo de usuario
+  let esVendedor = login.type == "vendedor";
+  
   if(data == null)
   {
     console.log("No hay datos")
