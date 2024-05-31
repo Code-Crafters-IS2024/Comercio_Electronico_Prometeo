@@ -10,7 +10,7 @@ from alch.models.Modelo_Compra import ModeloCompra
 from alch.models.Modelo_Encuentro import ModeloEncuentro
 
 from controller.catalogue import catalogue
-from authenticate import authenticate_user
+from authenticate import authenticate_user, authenticate_buyer, authenticate_seller
 
 from alch.alchemyClasses import db
 
@@ -32,7 +32,7 @@ def hello_world():
 
 @app.route('/api/login', methods=['GET','POST'])
 def login():
-    if session.get('user_id') != None and session.get('user_type') != None:
+    if session.get('user_id') and session.get('user_type'):
         return jsonify({
             "logged" : True,
             "user" : session['user_id'],
@@ -45,17 +45,23 @@ def login():
 
     name = request.form.get('username')
     passwd = request.form.get('password')
-    typeOfUser = authenticate_user(name, passwd)
-    if typeOfUser is not None:
+    typeOfUser = request.form.get('usertype')
 
-        session['user_id'] = name #definición de cookie de sesión.
+    authenticated = False
+
+    if typeOfUser == "vendedor":
+        authenticated = authenticate_seller(name, passwd)
+    elif typeOfUser == "comprador":
+        authenticated = authenticate_buyer(name, passwd)
+
+    if authenticated:
+        session['user_id'] = name  # definición de cookie de sesión.
         session['user_type'] = typeOfUser
         return jsonify({
-            "logged" : True,
-            "user" : session['user_id'],
-            "type" : session['user_type']
-            })
-
+            "logged": True,
+            "user": session['user_id'],
+            "type": typeOfUser
+        })
     else:
         return jsonify({"logged" : False,
                 "user" : None,
@@ -66,6 +72,7 @@ def login():
 @app.route('/api/logout')
 def logout():
     session['user_id'] = None
+    session['user_type'] = None
     return jsonify({"logged" : False,
                 "user" : None})
 

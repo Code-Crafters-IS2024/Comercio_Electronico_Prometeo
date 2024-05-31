@@ -20,7 +20,7 @@ const Home = () =>
 
 	  return (
 		  <div>
-		  Estas logeado!!
+		  Estas logeado como {logStatus.type}!!
 		  <a href="/logout">Cerrar sesión</a>
 		  <a href="/AgregarProducto">Agregar Producto</a>
 		  <Link to={`/compras/${idVendedor}`}>Listar Compras</Link>

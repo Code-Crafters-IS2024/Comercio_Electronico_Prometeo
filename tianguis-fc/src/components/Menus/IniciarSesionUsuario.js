@@ -34,10 +34,12 @@ const IniciarSesionUsuario = (props) => {
 
         const username = form.username.value;
         const password = form.password.value;
+        const usertype = form.usertype.value;
 
         let formData = new FormData()
         formData.append('username', username)
         formData.append('password', password)
+        formData.append('usertype', usertype)
 
         await sendFormData(formData);
         //Ir a home
@@ -47,10 +49,15 @@ const IniciarSesionUsuario = (props) => {
     return(
         <div className="sign-in-section">
             <h2>Iniciar Sesión</h2>
-            ¿Ya tienes sesión?
-            ¿Qué tipo de usuario eres?<br></br>
             <Card>
                 <form onSubmit={submitHandler}>
+                    <div>
+                        <label>¿Qué tipo de usuario eres?</label>
+                        <select name="usertype">
+                            <option value ="vendedor">Vendedor</option>
+                            <option value="comprador">Comprador</option>
+                        </select>
+                    </div>
                     <div>
                         <label>Número de cuenta:</label>
                         <input 
