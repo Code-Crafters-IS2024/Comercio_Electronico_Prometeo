@@ -87,9 +87,9 @@ def add_product():
         data = request.form
         foto = request.files['foto'].read() if 'foto' in request.files else None
         num_cuenta = session['user_id']
-        if ModeloVendedor.obtener_vendedor(num_cuenta) == None:
+        if ModeloVendedor.obtener_vendedor_cuenta(num_cuenta) == None:
             return jsonify({"message": "No existe el vendedor"}), 201
-        id_vendedor = ModeloVendedor.obtener_vendedor(num_cuenta).id_vendedor
+        id_vendedor = ModeloVendedor.obtener_vendedor_cuenta(num_cuenta).id_vendedor
         ModeloProducto.agregar_producto(data, foto, id_vendedor)
         return jsonify({"message": "Producto agregado con éxito"}), 201
     return jsonify({"message": "Producto no agregado con éxito"}), 201
@@ -105,10 +105,13 @@ def view_prods():
         return jsonify({"message":"Por favor inicia sesion"}),403
     
     if session['user_type'] == "vendedor":
-        data = ModeloProducto.productos_vendedor(session['user_id'])
+        print("vendedir")
+        id_vendedor = ModeloVendedor.obtener_vendedor_cuenta(session['user_id']).id_vendedor
+        data = ModeloProducto.productos_vendedor(id_vendedor)
     elif session['user_type'] == "comprador":
+        print("Comprador")
         data = Producto.query.all()
-    
+    print(data)
     if not data:
         return jsonify({"message" : "No hay productos registrados", "data" : None}), 404
         
@@ -119,7 +122,6 @@ def view_prods():
             
             id_vendedor = d.id_vendedor
             vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
-
             prod_data["id_producto"] = d.id_producto
             prod_data["vendedor"] = vendedor.nombres
             prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
@@ -145,7 +147,7 @@ def get_prod():
 
         id_vendedor = data_producto.id_vendedor
         data_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
-
+        
         dict_vendedor = {}
         dict_vendedor["id_vendedor"] = data_vendedor.id_vendedor
         dict_vendedor["nombres"] = data_vendedor.nombres
@@ -322,7 +324,7 @@ def get_product(id):
 @app.route('/api/get_compras/<int:id_vendedor>', methods=['GET', 'POST'])
 def get_compras(id_vendedor):
     #print("Obteniendo compras")
-    id_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor).id_vendedor
+    id_vendedor = ModeloVendedor.obtener_vendedor_cuenta(id_vendedor).id_vendedor
     compras = ModeloCompra.obtener_compras(id_vendedor)
     #print(compras)
     return jsonify([ModeloCompra.to_dict(compra) for compra in compras]), 200
@@ -345,9 +347,10 @@ def crear_encuentro():
 
 @app.route('/api/get_encuentros/<int:id>', methods=['GET'])
 def get_encuentros(id):
-    print("encuentros por id: ", id)
-    encuentros = ModeloEncuentro.obtener_encuentros(id)
+    user_type = request.args.get('user_type')
+    encuentros = ModeloEncuentro.obtener_encuentros(id, user_type)
     return jsonify([ModeloEncuentro.to_dict(encuentro) for encuentro in encuentros]), 200
+
 @app.route('/api/agregar_usuario', methods=['POST'])
 def agregar_usuario():
     data = request.form
