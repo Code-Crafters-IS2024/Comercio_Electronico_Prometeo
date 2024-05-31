@@ -86,9 +86,10 @@ def add_product():
     if request.method == 'POST':
         data = request.form
         foto = request.files['foto'].read() if 'foto' in request.files else None
-        id_vendedor = session['user_id']
-        if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
+        num_cuenta = session['user_id']
+        if ModeloVendedor.obtener_vendedor(num_cuenta) == None:
             return jsonify({"message": "No existe el vendedor"}), 201
+        id_vendedor = ModeloVendedor.obtener_vendedor(num_cuenta).id_vendedor
         ModeloProducto.agregar_producto(data, foto, id_vendedor)
         return jsonify({"message": "Producto agregado con éxito"}), 201
     return jsonify({"message": "Producto no agregado con éxito"}), 201
@@ -316,6 +317,7 @@ def get_product(id):
 @app.route('/api/get_compras/<int:id_vendedor>', methods=['GET', 'POST'])
 def get_compras(id_vendedor):
     #print("Obteniendo compras")
+    id_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor).id_vendedor
     compras = ModeloCompra.obtener_compras(id_vendedor)
     #print(compras)
     return jsonify([ModeloCompra.to_dict(compra) for compra in compras]), 200

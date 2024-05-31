@@ -51,7 +51,7 @@ CREATE TABLE producto(
     descripcion varchar(300) NOT NULL,
     costo DECIMAL(6,2) NOT NULL,
     categoria varchar(100) NOT NULL,
-    imagen BLOB,
+    imagen LONGBLOB,
     unidades SMALLINT NOT NULL,
     FOREIGN KEY (id_vendedor) REFERENCES vendedor(id_vendedor)
 );

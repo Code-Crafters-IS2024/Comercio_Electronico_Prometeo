@@ -54,7 +54,7 @@ class ModeloVendedor():
         return True
 
     def obtener_vendedor(id_vendedor):
-        data = Vendedor.query.filter_by(modelo_cuenta=id_vendedor).first()
+        data = Vendedor.query.filter_by(numero_cuenta=id_vendedor).first()
         return data
 
     def obtener_vendedores():
