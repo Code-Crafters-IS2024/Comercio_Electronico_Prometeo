@@ -160,7 +160,7 @@ def get_prod():
         dict_prod["unidades"] = data_producto.unidades
         dict_prod["calificacion"] = ModeloProducto.calificacion_promedio(id_producto)
         dict_prod["categoria"] = data_producto.categoria
-        dict_prod["nombre"] = data.nombre
+        dict_prod["nombre"] = data_producto.nombre
 
         data["producto"] = dict_prod
     except Exception as e:
