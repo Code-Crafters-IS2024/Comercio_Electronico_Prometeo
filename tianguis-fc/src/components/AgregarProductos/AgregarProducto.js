@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, Route, Routes } from 'react-router-dom';
 
+import "./agregar_prod.css";
+
 const AgregarProducto = () => {
     const [formData, setFormData] = useState({
         id_vendedor: '',
@@ -51,7 +53,8 @@ const AgregarProducto = () => {
         <div className="add-product-section">
             <h2>Agregar Producto</h2>
             <form onSubmit={handleSubmit}>
-                <div>
+                <div className="prod_form">
+                <div className="prod_field">
                     <label>Id Vendedor:</label>
                     <input
                         type="number"
@@ -61,17 +64,17 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Descripción:</label>
-                    <input
-                        type="text"
+                    <textarea
                         name="descripcion"
                         value={formData.descripcion}
                         onChange={handleChange}
+                        rows="10"
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Costo:</label>
                     <input
                         type="number"
@@ -81,7 +84,7 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Categoría:</label>
                     <input
                         type="text"
@@ -91,7 +94,7 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Foto:</label>
                     <input
                         type="file"
@@ -99,7 +102,7 @@ const AgregarProducto = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Unidades:</label>
                     <input
                         type="number"
@@ -109,8 +112,10 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
+
                 <div>
                     <button type="submit">Agregar Producto</button>
+                </div>
                 </div>
             </form>
         </div>
