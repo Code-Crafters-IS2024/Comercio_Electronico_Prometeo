@@ -3,9 +3,9 @@ from alch.alchemyClasses import db
 class Compra(db.Model):
     __tablename__ = 'compra'
     id_compra = Column(Integer, primary_key=True, autoincrement=True)
-    id_producto = Column(Integer)
-    id_vendedor = Column(Integer)
-    id_comprador = Column(Integer)
+    id_producto = Column(Integer, nullable=False)
+    id_vendedor = Column(Integer, nullable=False)
+    id_comprador = Column(Integer, nullable=False)
     total = Column(DECIMAL, nullable=False)
     fecha = Column(Date, nullable=False)
     

@@ -3,9 +3,9 @@ from alch.alchemyClasses import db
 class Encuentro(db.Model):
     __tablename__ = 'encuentro'
     id_encuentro = Column(Integer, primary_key=True, autoincrement=True)
-    id_vendedor = Column(Integer)
-    id_comprador = Column(Integer)
-    id_compra = Column(Integer)
+    id_vendedor = Column(Integer, nullable=False)
+    id_comprador = Column(Integer, nullable=False)
+    id_compra = Column(Integer, nullable=False)
     fecha = Column(Date, nullable=False)
     lugar = Column(String(60), nullable=False)
     hora = Column(Time, nullable=False)

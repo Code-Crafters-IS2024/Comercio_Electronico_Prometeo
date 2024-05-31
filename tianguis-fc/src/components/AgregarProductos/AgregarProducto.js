@@ -8,6 +8,7 @@ import "./agregar_prod.css";
 const AgregarProducto = () => {
     const [formData, setFormData] = useState({
         id_vendedor: '',
+	nombre: '',
         descripcion: '',
         costo: '',
         categoria: '',
@@ -68,6 +69,16 @@ const AgregarProducto = () => {
             <h2>Agregar Producto</h2>
             <form onSubmit={handleSubmit}>
                 <div className="prod_form">
+		    <div className="prod_field">
+                    <label>Nombre:</label>
+                    <textarea
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        rows="2"
+                        required
+                    />
+                </div>
                 <div className="prod_field">
                     <label>Descripción:</label>
                     <textarea

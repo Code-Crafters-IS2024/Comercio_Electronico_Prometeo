@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS comprador;
 -- primero definimos las tablas sin referencias
 
 CREATE TABLE vendedor(
-    numero_cuenta varchar(50),
+    numero_cuenta varchar(50) UNIQUE,
     id_vendedor INT AUTO_INCREMENT PRIMARY KEY,
     nombres varchar(50) NOT NULL,
     ap_pat varchar(50) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE vendedor(
 );
 
 CREATE TABLE comprador(
-    numero_cuenta INT,
+    numero_cuenta INT UNIQUE,
     id_comprador INT AUTO_INCREMENT PRIMARY KEY,
     nombres varchar(50) NOT NULL,
     ap_pat varchar(50) NOT NULL,

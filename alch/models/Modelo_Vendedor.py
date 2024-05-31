@@ -32,7 +32,6 @@ class ModeloVendedor():
         telefono = data.get("num_telefono")
         email = data.get("correo")
         genero = data.get("genero")
-        profile_picture = data.get("foto")
         password = data.get("password")
 
         vendedor = Vendedor.query.get(id_vendedor)
@@ -43,7 +42,6 @@ class ModeloVendedor():
         vendedor.num_telefono = telefono
         vendedor.correo = email
         vendedor.genero = genero
-        vendedor.foto = profile_picture
         vendedor.password = password
 
         db.session.commit()
@@ -56,7 +54,7 @@ class ModeloVendedor():
         return True
 
     def obtener_vendedor(id_vendedor):
-        data = Vendedor.query.filter_by(id_vendedor=id_vendedor).first()
+        data = Vendedor.query.filter_by(modelo_cuenta=id_vendedor).first()
         return data
 
     def obtener_vendedores():

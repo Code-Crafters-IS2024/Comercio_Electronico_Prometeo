@@ -6,6 +6,7 @@ const ModificarProducto = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         id_vendedor: '',
+	nombre: '',
         descripcion: '',
         costo: '',
         categoria: '',
@@ -19,6 +20,7 @@ const ModificarProducto = () => {
             .then(response => response.json())
             .then(data => setFormData({
                 id_vendedor: data.id_vendedor,
+		nombre: data.nombre,
                 descripcion: data.descripcion,
                 costo: data.costo,
                 categoria: data.categoria,
@@ -77,6 +79,16 @@ const ModificarProducto = () => {
                         type="number"
                         name="id_vendedor"
                         value={formData.id_vendedor}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+		<div>
+                    <label>Nombre:</label>
+                    <input
+                        type="text"
+                        name="nombre"
+                        value={formData.nombre}
                         onChange={handleChange}
                         required
                     />

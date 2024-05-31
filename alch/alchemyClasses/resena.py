@@ -4,9 +4,9 @@ from alch.alchemyClasses import db
 class Resena(db.Model):
     __tablename__ = 'resena'
     id_resena = Column(Integer,nullable=False, autoincrement=True, primary_key=True)
-    id_producto = Column(Integer)
-    id_comprador = Column(Integer)
-    comentario = Column(String(300), nullable=False)#Not null
+    id_producto = Column(Integer, nullable=False)
+    id_comprador = Column(Integer, nullable=False)
+    comentario = Column(String(300), nullable=False)
     calificacion = Column(TINYINT, nullable=False)
     
     def __init__(self, id_producto, id_comprador, comentario, calificacion):

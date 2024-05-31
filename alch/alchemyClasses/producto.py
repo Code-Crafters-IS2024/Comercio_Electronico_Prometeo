@@ -3,17 +3,17 @@ from alch.alchemyClasses import db
 class Producto(db.Model):
     __tablename__ = 'producto'
     id_producto = Column(Integer,nullable=False, autoincrement=True, primary_key=True)
-    id_vendedor = Column(Integer)
-    descripcion = Column(String(300), nullable=False)#Not null
+    id_vendedor = Column(Integer, nullable=False)
+    nombre = Column(String(20), nullable=False)
+    descripcion = Column(String(300), nullable=False)
     costo = Column(Float, nullable=False)
     categoria = Column(String(100), nullable=False)
-    #Imagen
-    imagen = Column(LargeBinary)#Longblob
     imagen = Column(LargeBinary, nullable=True)#Longblob
     unidades = Column(Integer, nullable=False)
 
-    def __init__(self, id_vendedor, descripcion, costo, categoria, unidades, foto):
+    def __init__(self, id_vendedor, nombre, descripcion, costo, categoria, unidades, foto):
         self.id_vendedor = id_vendedor
+        self.nombre = nombre
         self.descripcion = descripcion
         self.costo = costo
         self.categoria = categoria
@@ -21,4 +21,4 @@ class Producto(db.Model):
         self.unidades = unidades
         
     def __str__(self):
-        return f'Nombre:{self.id_producto} {self.descripcion}\n'
+        return f'Nombre:{self.nombre} {self.descripcion}\n'
