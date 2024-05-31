@@ -30,7 +30,7 @@ const CardProduct = ({data, id, esVendedor}) =>
             </div>
             <div className="product-info-panel">
                 <div className="product-info">
-                    <label className="product-name">Nombre del producto</label>
+                    <label className="product-name">{data.nombre}</label>
                     <label>Vendedor: {data.vendedor}</label>
                     <label><label className="producto-calificacion">{calificacion}</label> ({data.calificacion.toFixed(1)})</label>
                     <div className="producto-unidad-precio">

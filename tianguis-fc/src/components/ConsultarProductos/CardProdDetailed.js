@@ -29,7 +29,7 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
             </div>
             <div className="product-info-panel">
                 <div className="product-info">
-                    <h1>Nombre del Producto</h1>
+                    <h1>{data.producto.nombre}</h1>
 
                     <label><label  className="producto-calificacion">{calificacion}</label> ({data.producto.calificacion.toFixed(1)})</label>
                     <label>{data.producto.categoria}</label>

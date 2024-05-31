@@ -113,6 +113,7 @@ def view_prods():
         prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
         prod_data["precio"] = d.costo
         prod_data["unidades"] = d.unidades
+        prod_data["nombre"] = "Nombre de Producto"
 
         dict[d.id_producto] = prod_data
     return jsonify({"message":"Productos consultados exitosamente", "data":dict}), 201
@@ -144,6 +145,7 @@ def get_prod():
         dict_prod["unidades"] = data_producto.unidades
         dict_prod["calificacion"] = ModeloProducto.calificacion_promedio(id_producto)
         dict_prod["categoria"] = data_producto.categoria
+        dict_prod["nombre"] = "Nombre de Producto"
 
         data["producto"] = dict_prod
     except Exception as e:
