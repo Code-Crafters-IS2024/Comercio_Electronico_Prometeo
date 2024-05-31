@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Navigate } from "react-router";
 import { NavLink, Route, Routes } from 'react-router-dom';
+
+import LoginStatus from "../Utils/FetchLogIn";
+import "./agregar_prod.css";
 
 const AgregarProducto = () => {
     const [formData, setFormData] = useState({
@@ -10,6 +14,18 @@ const AgregarProducto = () => {
         foto: null,
         unidades: ''
     });
+
+    let login = LoginStatus();
+
+    if(login == null)
+    {
+        return null
+    }
+
+    if(!login.logged || login.type != "vendedor")
+    {
+        return <Navigate to="/"/>
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,27 +67,18 @@ const AgregarProducto = () => {
         <div className="add-product-section">
             <h2>Agregar Producto</h2>
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Id Vendedor:</label>
-                    <input
-                        type="number"
-                        name="id_vendedor"
-                        value={formData.id_vendedor}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div>
+                <div className="prod_form">
+                <div className="prod_field">
                     <label>Descripción:</label>
-                    <input
-                        type="text"
+                    <textarea
                         name="descripcion"
                         value={formData.descripcion}
                         onChange={handleChange}
+                        rows="10"
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Costo:</label>
                     <input
                         type="number"
@@ -81,7 +88,7 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Categoría:</label>
                     <input
                         type="text"
@@ -91,7 +98,7 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Foto:</label>
                     <input
                         type="file"
@@ -99,7 +106,7 @@ const AgregarProducto = () => {
                         onChange={handleFileChange}
                     />
                 </div>
-                <div>
+                <div className="prod_field">
                     <label>Unidades:</label>
                     <input
                         type="number"
@@ -109,8 +116,10 @@ const AgregarProducto = () => {
                         required
                     />
                 </div>
+
                 <div>
                     <button type="submit">Agregar Producto</button>
+                </div>
                 </div>
             </form>
         </div>

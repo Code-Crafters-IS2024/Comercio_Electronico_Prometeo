@@ -5,8 +5,8 @@ from alch.alchemyClasses.resena import Resena
 from alch.alchemyClasses import db
 
 class ModeloProducto():
-    def agregar_producto(data, foto):
-        id_vendedor=data.get('id_vendedor')
+    def agregar_producto(data, foto, id):
+        id_vendedor=id
         descripcion=data.get('descripcion')
         costo=data.get('costo')
         categoria=data.get('categoria')

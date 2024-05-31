@@ -79,13 +79,17 @@ def logout():
 
 @app.route('/api/add_product', methods=['POST'])
 def add_product():
+    if session.get('user_id') == None or session.get('user_type') == None:
+        return jsonify({"message": "Debes iniciar sesion"}), 201
+    if session['user_type'] != "vendedor":
+        return jsonify({"message": "Debes ser un vendedor para agregar productos"}), 201
     if request.method == 'POST':
         data = request.form
         foto = request.files['foto'].read() if 'foto' in request.files else None
-        id_vendedor = data.get('id_vendedor')
+        id_vendedor = session['user_id']
         if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
             return jsonify({"message": "No existe el vendedor"}), 201
-        ModeloProducto.agregar_producto(data, foto)
+        ModeloProducto.agregar_producto(data, foto, id_vendedor)
         return jsonify({"message": "Producto agregado con éxito"}), 201
     return jsonify({"message": "Producto no agregado con éxito"}), 201
 
@@ -119,6 +123,7 @@ def view_prods():
         prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
         prod_data["precio"] = d.costo
         prod_data["unidades"] = d.unidades
+        prod_data["nombre"] = "Nombre de Producto"
 
         dict[d.id_producto] = prod_data
     return jsonify({"message":"Productos consultados exitosamente", "data":dict}), 201
@@ -150,6 +155,7 @@ def get_prod():
         dict_prod["unidades"] = data_producto.unidades
         dict_prod["calificacion"] = ModeloProducto.calificacion_promedio(id_producto)
         dict_prod["categoria"] = data_producto.categoria
+        dict_prod["nombre"] = "Nombre de Producto"
 
         data["producto"] = dict_prod
     except Exception as e:
