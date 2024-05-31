@@ -25,16 +25,16 @@ def authenticate_user(username, password):
 
 def authenticate_buyer(username, password):
     try:
-        user = ModeloComprador.obtener_comprador(username)
+        user = ModeloComprador.obtener_comprador_cuenta(username)
 
         # if user != None and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
         if user is not None and password == user.password:
-            return True
+            return user.id_comprador
 
     except NoResultFound:
-        return False
+        return None
     
-    return False
+    return None
 
 
 def authenticate_seller(username, password):
@@ -43,9 +43,9 @@ def authenticate_seller(username, password):
 
         # if user != None and bcrypt.checkpw(password.encode('utf-8'), user.password.encode('utf-8')):
         if user is not None and password == user.password:
-            return True
+            return user.id_vendedor
 
     except NoResultFound:
-        return False
+        return None
     
-    return False
+    return None

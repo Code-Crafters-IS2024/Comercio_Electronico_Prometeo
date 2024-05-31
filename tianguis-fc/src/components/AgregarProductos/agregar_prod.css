@@ -1,11 +1,4 @@
-.add-product-section {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    text-align: center;
-}
+
 
 .add-product-section h2 {
     margin-bottom: 20px;
@@ -26,6 +19,10 @@
     margin-bottom: 15px;
 }
 
+#file{
+    border: none;
+}
+
 .prod_field label {
     margin-bottom: 5px;
 }
@@ -39,10 +36,6 @@
     box-sizing: border-box;
     max-height: 40px;
     text-align: center;
-}
-
-.prod_field input {
-    margin: ;
 }
 
 .prod_field textarea {
@@ -61,4 +54,15 @@ form button {
 
 form button:hover {
     background-color: #218838;
+}
+
+textarea {
+    resize: none;
+}
+
+.add-product-section
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

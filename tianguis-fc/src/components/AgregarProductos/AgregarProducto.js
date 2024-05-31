@@ -114,6 +114,7 @@ const AgregarProducto = () => {
                     <input
                         type="file"
                         name="foto"
+                        id={"file"}
                         onChange={handleFileChange}
                     />
                 </div>

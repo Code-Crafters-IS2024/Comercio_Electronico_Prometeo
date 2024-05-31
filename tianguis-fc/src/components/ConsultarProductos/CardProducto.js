@@ -26,7 +26,7 @@ const CardProduct = ({data, id, esVendedor}) =>
     return (
         <div className="product">
             <div className="product-image">
-                {/* Aqui va la imagen del producto */}
+                {if data.imagen:}
             </div>
             <div className="product-info-panel">
                 <div className="product-info">
