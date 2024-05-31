@@ -110,3 +110,9 @@ class ModeloProducto():
             print(e)
         return data
     
+    def restar_unidades(id_producto, total):
+        producto = Producto.query.get(id_producto)
+        producto.unidades -= int(total)
+        db.session.commit()
+        
+    
