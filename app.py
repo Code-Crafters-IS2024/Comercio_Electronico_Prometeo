@@ -66,8 +66,10 @@ def login():
 @app.route('/api/logout')
 def logout():
     session['user_id'] = None
+    session['user_type'] = None
     return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
 @app.route('/api/add_product', methods=['POST'])
 def add_product():
