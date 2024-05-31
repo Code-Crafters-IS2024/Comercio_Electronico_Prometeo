@@ -8,7 +8,7 @@ import "./ConsultarProductos.css";
 const Consultar_Producto = () =>
 {
   //Cambiar por chequeo para determinar tipo de usuario
-  let esVendedor = false;
+  let esVendedor = true;
 
   const [data, setData] = useState({});
 

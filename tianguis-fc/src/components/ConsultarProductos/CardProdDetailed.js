@@ -42,13 +42,13 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
                     </div>
                 </div>
                 <div className="product-buttons">
-                {esVendedor?
-                    <a href={`/path/a/modificar?id_producto=${id}`} className="product-nav-button modificar">Modificar</a>
-                    :
-                    <a href="" className="product-nav-button comprar">Comprar</a>
-                }
                 {esVendedor &&
                     <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
+                }
+                {esVendedor?
+                    <a href={`/modificarproducto?id=${id}`} className="product-nav-button modificar">Modificar</a>
+                    :
+                    <a href="" className="product-nav-button comprar">Comprar</a>
                 }
                 </div>
             </div>

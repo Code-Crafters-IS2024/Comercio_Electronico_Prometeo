@@ -27,10 +27,10 @@ const Main = () => {
                 <Route path="/productos" Component={Consultar_Producto}></Route>
                 <Route path="/productos/producto/:id_producto" Component={Producto_Individual}></Route>
                 <Route path="/AgregarProducto" Component={AgregarProducto}/>
-		<Route path="/compras/:id" element={<ListarCompras />} />
-		<Route path="/compra/:id" element={<CompraInfo />} />
-		<Route path="/crear_encuentro/:id_compra" element={<EstablecerEncuentro />} />
-		<Route path="/ver_encuentros/:id" element={<ListarEncuentros />} />
+                <Route path="/compras/:id" element={<ListarCompras />} />
+                <Route path="/compra/:id" element={<CompraInfo />} />
+                <Route path="/crear_encuentro/:id_compra" element={<EstablecerEncuentro />} />
+                <Route path="/ver_encuentros/:id" element={<ListarEncuentros />} />
              </Routes>);
 
 };

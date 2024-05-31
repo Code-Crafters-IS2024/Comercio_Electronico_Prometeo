@@ -12,7 +12,7 @@ import CrearResena from "./CrearResena";
 const Producto_Individual = () =>
 {
   //Determinar si el usuario es comprador o vendedor
-  let esVendedor = false;
+  let esVendedor = true;
 
   let { id_producto } = useParams();
 
