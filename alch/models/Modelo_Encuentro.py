@@ -15,23 +15,18 @@ class ModeloEncuentro():
         db.session.add(encuentro)
         db.session.commit()
         return True
-    def obtener_encuentros(id):
+    def obtener_encuentros(id, user_type):
         try:
-            vendedor = ModeloVendedor.obtener_vendedor(id)
-            comprador = ModeloComprador.obtener_comprador(id)
-            if vendedor:                
-                data1 = Encuentro.query.filter_by(id_vendedor=vendedor.id_vendedor).all()
-            if comprador:
-                data2 = Encuentro.query.filter_by(id_comprador=comprador.id_comprador).all()
-            if vendedor and comprador:
-                return data1 + data2
-            elif vendedor:
-                return data1
-            elif comprador:
-                return data2
+            if user_type == "vendedor":
+                vendedor = ModeloVendedor.obtener_vendedor(id)
+                data = Encuentro.query.filter_by(id_vendedor=vendedor.id_vendedor).all()
+                return data
             else:
-                return None
-            
+                    
+                comprador = ModeloComprador.obtener_comprador(id)
+                data = Encuentro.query.filter_by(id_comprador=comprador.id_comprador).all()
+                return data
+        
         except Exception as e:
             print("Error:", str(e))
         return []

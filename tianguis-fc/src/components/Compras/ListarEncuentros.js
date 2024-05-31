@@ -1,18 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import LoginStatus from "../Utils/FetchLogIn";
 
 const ListarEncuentros = () => {
     const { id } = useParams();
     const [encuentros, setEncuentros] = useState([]);
-
+    const logStatus = LoginStatus();
+    
     useEffect(() => {
-	console.log(`ID: ${id}`);
-        fetch(`/api/get_encuentros/${id}`)
+    if (logStatus) {
+        const userType = logStatus.type;
+        fetch(`/api/get_encuentros/${id}?user_type=${userType}`)
             .then(response => response.json())
             .then(data => setEncuentros(data))
             .catch(error => console.error('Error:', error));
-    }, []);
-
+    }
+}, [id, logStatus]);
     return (
         <div>
             <h2>Encuentros establecidos</h2>
@@ -28,3 +31,4 @@ const ListarEncuentros = () => {
 };
 
 export default ListarEncuentros;
+
