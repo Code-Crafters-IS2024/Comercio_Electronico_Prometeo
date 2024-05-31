@@ -41,7 +41,7 @@ const CardProduct = ({data, id, esVendedor}) =>
                 <div className="product-buttons">
                     {/* Dependiendo del usuario, mostrar botones para modificar/eliminar el producto o comprar/reseñar */}
                     {esVendedor?
-                        <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
+                        <a href={`/productos/eliminar/${id}`}  className="product-nav-button eliminar">Eliminar</a>
                         :
                         <a href="" className="product-nav-button comprar"><b>Comprar</b></a>
                     }

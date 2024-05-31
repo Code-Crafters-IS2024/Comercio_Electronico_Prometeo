@@ -176,8 +176,16 @@ Borra un producto y todas las reseñas asociadas con el
 """
 @app.route("/api/producto/eliminar", methods=['GET'])
 def eliminar_producto():
+    if session.get('user_id') == None or session.get('user_type') == None:
+        return jsonify({"message": "Debes iniciar sesion"}), 403
+    if session['user_type'] != "vendedor":
+        return jsonify({"message": "Debes ser un vendedor para eliminar productos"}), 403
     try:
         id_producto = request.args.get("id_producto")
+        producto = ModeloProducto.obtener_producto(id_producto)
+        
+        if session['user_id'] != str(producto.id_vendedor):
+            return jsonify({"message": "No puedes eliminar este producto"}), 404
         ModeloProducto.delete_product(id_producto)
     except Exception as e:
         print(e)

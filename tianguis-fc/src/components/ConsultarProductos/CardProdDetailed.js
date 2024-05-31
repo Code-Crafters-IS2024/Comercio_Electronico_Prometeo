@@ -43,7 +43,7 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
                 </div>
                 <div className="product-buttons">
                 {esVendedor &&
-                    <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
+                    <a href={`/productos/eliminar/${id}`} className="product-nav-button eliminar">Eliminar</a>
                 }
                 {esVendedor?
                     <a href={`/modificarproducto/${id}`} className="product-nav-button modificar">Modificar</a>

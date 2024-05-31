@@ -37,16 +37,12 @@ class ModeloProducto():
     def delete_product(id_producto):
         # Primero tenemos que borrar todas las reseñas en donde esta asociado el producto
         resenas_asociadas = Resena.query.filter_by(id_producto=id_producto).all()
-        for resena in resenas_asociadas:
-            try:
+        try:
+            for resena in resenas_asociadas:
                 db.session.delete(resena)
                 db.session.commit()
-            except Exception as e:
-                print("Algo salió mal al eliminar el registro de alguna reseña asociada al producto: " + str(e))
-            return False
-        # Una vez hacemos eso podemos borrar el producto
-        producto = Producto.query.get(id_producto)
-        try:
+            # Una vez hacemos eso podemos borrar el producto
+            producto = Producto.query.get(id_producto)
             db.session.delete(producto)
             db.session.commit()
         except Exception as e:
