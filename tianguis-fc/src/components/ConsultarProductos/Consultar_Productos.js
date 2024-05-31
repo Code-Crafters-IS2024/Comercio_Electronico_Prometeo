@@ -47,8 +47,6 @@ const Consultar_Producto = () =>
 
   return(
     <div>
-      {login.type == "vendedor" &&
-     <div className="productos-grid"><a href="/AgregarProducto" className="product-nav-button comprar">Agregar Producto</a></div>}
     <div className="productos-grid">
       {Object.keys(productos).map((key) => (
         <div key={key}>
