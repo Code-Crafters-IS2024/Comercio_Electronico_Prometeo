@@ -37,6 +37,10 @@ const ComprarProd = ({data}) =>
 
         window.location.reload();
     }
+    if(data.unidades <= 0)
+    {
+        return <h3>Agotado</h3>
+    }
     return(
         <form onSubmit={submitHandler} className="prod-buy">
             <button type="submit">Comprar</button>
