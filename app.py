@@ -148,7 +148,7 @@ def eliminar_producto():
     return jsonify({"message": "Reseña eliminada exitosamente"}), 201
 
 """
-Obtiene la informacion simplificada de todos los productos
+Obtiene las reseñas de un producto
 """
 @app.route("/api/view_resenas_prod", methods=['GET'])
 def view_resenas_prod():
@@ -231,6 +231,7 @@ def obtener_resena_comprador_producto():
         return jsonify({"message":str(e), "data":None}), 404
     return jsonify({"message" : "Reseña consultada exitosamente", "data":data}), 201
 
+"""API para eliminar una reseña"""
 @app.route("/api/resena/eliminar", methods=['GET'])
 def eliminar_resena():
     try:
@@ -242,6 +243,7 @@ def eliminar_resena():
     
     return jsonify({"message" : "Reseña eliminada exitosamente"}), 201
 
+"""API para modificar una reseña"""
 @app.route("/api/resena/modificar", methods=['POST'])
 def modificar_resena():
     try:
