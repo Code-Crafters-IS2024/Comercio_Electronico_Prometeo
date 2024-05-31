@@ -5,12 +5,13 @@ import LoginStatus from "../Utils/FetchLogIn";
 //Pagina principal del usuario cuando esta logeado
 const Home = () =>
       {
-		let logStatus = LoginStatus();
+	  const idVendedor = 1;
+	  let logStatus = LoginStatus();
 
-		if(logStatus == null)
-		{
-				  return null
-		}
+	  if(logStatus == null)
+	  {
+              return null
+	  }
 	  //Si el usuario esta logeado, redirigir al inicio
 	  if(!logStatus.logged)
 	  {
@@ -19,7 +20,7 @@ const Home = () =>
 
 	  return (
 		  <div>
-		  
+		  <h1>Bienvenido Comercio Electrónico Prometeo</h1>
 		  </div>);
 
       }
