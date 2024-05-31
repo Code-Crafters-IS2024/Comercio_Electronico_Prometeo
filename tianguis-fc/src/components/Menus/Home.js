@@ -20,7 +20,7 @@ const Home = () =>
 
 	  return (
 		  <div>
-		  <h1>Bienvenido Comercio Electrónico Prometeo</h1>
+		  <h1>Bienvenido a Comercio Electrónico Prometeo</h1>
 		  </div>);
 
       }
