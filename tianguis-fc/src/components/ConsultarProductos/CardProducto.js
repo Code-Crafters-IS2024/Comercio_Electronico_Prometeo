@@ -1,5 +1,7 @@
 
 import "./ConsultarProductos.css";
+import React, { useState } from 'react';
+import missing from "../../assets/missing.jpeg";
 
 /**
  * Tarjeta que muestra informacion simplificada de un producto
@@ -9,6 +11,7 @@ import "./ConsultarProductos.css";
 const CardProduct = ({data, id, esVendedor}) =>
 {
     let calificacion = ""
+    const [imageSrc, setImageSrc] = useState(missing);
 
     //Genera la calificacion como estrellas usando caracteres ascii
     for(let i = 0; i < 5; i++)
@@ -23,10 +26,15 @@ const CardProduct = ({data, id, esVendedor}) =>
         }
     }
 
+    if (data.imagen){
+        const uerrele = URL.createObjectURL(data.imagen)
+        setImageSrc(uerrele)
+    }
+
     return (
         <div className="product">
             <div className="product-image">
-                {if data.imagen:}
+                <img src={imageSrc} alt={data.name}/>
             </div>
             <div className="product-info-panel">
                 <div className="product-info">

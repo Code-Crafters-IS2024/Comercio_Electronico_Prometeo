@@ -74,6 +74,11 @@
     font-size: x-large;
 }
 
+.product-image img{
+    max-height: 200px;
+    max-width: 200px;
+}
+
 .product-description
 {
     font-size: xx-large;
