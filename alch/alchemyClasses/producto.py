@@ -7,6 +7,8 @@ class Producto(db.Model):
     descripcion = Column(String(300), nullable=False)#Not null
     costo = Column(Float, nullable=False)
     categoria = Column(String(100), nullable=False)
+    #Imagen
+    imagen = Column(LargeBinary)#Longblob
     imagen = Column(LargeBinary, nullable=True)#Longblob
     unidades = Column(Integer, nullable=False)
 

@@ -1,0 +1,182 @@
+.productos-grid
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product
+{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+
+    margin: 10px;
+
+    box-shadow: 2px 2px 2px lightgray;
+    padding: 10px;
+}
+
+.detailed
+{
+    justify-content: center;
+    flex-shrink: 1;
+}
+
+.product-info-panel
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.product-info
+{
+    display:flex;
+    flex-direction: column;
+    justify-content: start;
+    text-align: start;
+    margin-left: 10px;
+}
+
+.product-image
+{
+    width: 200px;
+    height: 200px;
+    background-color: lightgray;
+    align-items: center;
+    align-self: center;
+}
+
+.product-name
+{
+    font-size: x-large;
+}
+
+.producto-precio
+{
+    font-size: xx-large;
+}
+
+.producto-unidad-precio
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 15px;
+}
+
+.producto-calificacion
+{
+    color:goldenrod;
+    font-size: x-large;
+}
+
+.product-description
+{
+    font-size: xx-large;
+    margin: 20px;
+}
+
+.product-buttons
+{
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.product-nav-button
+{
+    display: block;
+    text-decoration: none;
+
+    border: 2px solid grey;
+    color: gray;
+    border-radius: 50px;
+
+    padding: 5px;
+    margin: 5px;
+
+    transition: 0.1s;
+
+    user-select: none;
+    cursor: pointer;
+}
+
+.product-nav-button:hover
+{
+    transform: scale(1.1);
+}
+
+/* Colores para los distintos botones*/
+
+.detalles
+{
+    color: #0099ff;
+    border-color: #0099ff;
+}
+
+.modificar
+{
+    color: #36df77;
+    border-color: #36df77;
+}
+
+.eliminar
+{
+    color: crimson;
+    border-color: crimson;
+}
+
+.comprar
+{
+    color: white;
+    background-color: goldenrod;
+    border-color: goldenrod;
+    
+}
+
+.resenar
+{
+    color:goldenrod;
+    border-color: goldenrod;
+}
+
+
+/* Reseñas */
+.resena-box
+{
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    column-gap: 40px;
+    padding-left: 120px;
+    padding-right: 120px;
+}
+
+.resenas-list
+{
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    flex-grow: 1;
+}
+
+.resena-card
+{
+    display: flex;
+    flex-direction: column;
+    box-shadow: 3px 3px 3px lightgray;
+    padding: 20px;
+}
+
+.resena-form
+{
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+}

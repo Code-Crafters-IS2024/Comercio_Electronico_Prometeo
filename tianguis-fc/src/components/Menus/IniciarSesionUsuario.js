@@ -4,7 +4,6 @@ import Card from "../UI/Card";
 import FiltroVistasUsuario from "./FiltroVistasUsuario";
 import { Navigate } from "react-router";
 import LoginStatus from "../Utils/FetchLogIn";
-
 const IniciarSesionUsuario = (props) => {
 
     let logStatus = LoginStatus();

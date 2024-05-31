@@ -6,6 +6,9 @@ import IniciarSesionUsuario from "./IniciarSesionUsuario";
 import Start from "./Start";
 import Home from "./Home";
 import Logout from "./Logout";
+import ModificarProductos from "../ModificarProductos/ModificarProductos";
+import Consultar_Producto from "../ConsultarProductos/Consultar_Productos";
+import Producto_Individual from "../ConsultarProductos/Producto_Individual";
 import AgregarProducto from "../AgregarProductos/AgregarProducto";
 import ListarCompras from "../Compras/ListarCompras";
 import CompraInfo from "../Compras/Compra";
@@ -20,6 +23,9 @@ const Main = () => {
                 <Route path="/login" Component={IniciarSesionUsuario}></Route>
                 <Route path="/home" Component={Home}></Route>
                 <Route path="/logout" Component={Logout}/>
+                <Route path="/modificarproducto" Component={ModificarProductos}></Route>
+                <Route path="/productos" Component={Consultar_Producto}></Route>
+                <Route path="/productos/producto/:id_producto" Component={Producto_Individual}></Route>
                 <Route path="/AgregarProducto" Component={AgregarProducto}/>
 		<Route path="/compras/:id" element={<ListarCompras />} />
 		<Route path="/compra/:id" element={<CompraInfo />} />
