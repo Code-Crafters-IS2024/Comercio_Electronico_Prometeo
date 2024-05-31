@@ -40,7 +40,7 @@ const ComprarProd = ({data}) =>
     return(
         <form onSubmit={submitHandler} className="prod-buy">
             <button type="submit">Comprar</button>
-            <input type="number" min={1} max={data.unidades} name="cantidad" className="prod-cantidad" placeholder="1"></input>
+            <input type="number" min={1} max={data.unidades} name="cantidad" className="prod-cantidad" placeholder="1" required></input>
         </form>
     );
 }

@@ -372,6 +372,7 @@ def agregar_usuario():
             return jsonify({"success": True, "message": "Vendedor registrado exitosamente"}), 201
     return jsonify({"success": False, "message": "Error al registrar el usuario"}), 400
 
+"""Agrega registro de compra para un producto dado"""
 @app.route("/api/comprar/agregar", methods=['POST'])
 def agregar_compra():
     data = {}
