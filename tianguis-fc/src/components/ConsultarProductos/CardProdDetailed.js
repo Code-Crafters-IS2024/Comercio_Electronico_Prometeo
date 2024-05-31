@@ -46,7 +46,7 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
                     <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
                 }
                 {esVendedor?
-                    <a href={`/modificarproducto?id=${id}`} className="product-nav-button modificar">Modificar</a>
+                    <a href={`/modificarproducto/${id}`} className="product-nav-button modificar">Modificar</a>
                     :
                     <a href="" className="product-nav-button comprar">Comprar</a>
                 }

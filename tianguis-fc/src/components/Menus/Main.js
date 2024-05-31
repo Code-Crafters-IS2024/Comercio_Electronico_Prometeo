@@ -23,7 +23,7 @@ const Main = () => {
                 <Route path="/login" Component={IniciarSesionUsuario}></Route>
                 <Route path="/home" Component={Home}></Route>
                 <Route path="/logout" Component={Logout}/>
-                <Route path="/modificarproducto" Component={ModificarProductos}></Route>
+                <Route path="/modificarproducto/:id" Component={ModificarProductos}></Route>
                 <Route path="/productos" Component={Consultar_Producto}></Route>
                 <Route path="/productos/producto/:id_producto" Component={Producto_Individual}></Route>
                 <Route path="/AgregarProducto" Component={AgregarProducto}/>
