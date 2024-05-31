@@ -1,5 +1,7 @@
 
 import "./ConsultarProductos.css";
+import React, { useState } from 'react';
+import missing from "../../assets/missing.jpeg";
 
 /**
  * Tarjeta que muestra informacion simplificada de un producto
@@ -9,6 +11,7 @@ import "./ConsultarProductos.css";
 const CardProduct = ({data, id, esVendedor}) =>
 {
     let calificacion = ""
+    const [imageSrc, setImageSrc] = useState(missing);
 
     //Genera la calificacion como estrellas usando caracteres ascii
     for(let i = 0; i < 5; i++)
@@ -23,10 +26,15 @@ const CardProduct = ({data, id, esVendedor}) =>
         }
     }
 
+    if (data.imagen){
+        const uerrele = URL.createObjectURL(data.imagen)
+        setImageSrc(uerrele)
+    }
+
     return (
         <div className="product">
             <div className="product-image">
-                {/* Aqui va la imagen del producto */}
+                <img src={imageSrc} alt={data.name}/>
             </div>
             <div className="product-info-panel">
                 <div className="product-info">
@@ -40,10 +48,8 @@ const CardProduct = ({data, id, esVendedor}) =>
                 </div>
                 <div className="product-buttons">
                     {/* Dependiendo del usuario, mostrar botones para modificar/eliminar el producto o comprar/reseñar */}
-                    {esVendedor?
-                        <a href={`/path/a/eliminar?id_producto=${id}`} className="product-nav-button eliminar">Eliminar</a>
-                        :
-                        <a href="" className="product-nav-button comprar"><b>Comprar</b></a>
+                    {esVendedor &&
+                        <a href={`/productos/eliminar/${id}`}  className="product-nav-button eliminar">Eliminar</a>
                     }
 
                     {esVendedor &&

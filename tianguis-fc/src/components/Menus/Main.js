@@ -15,6 +15,7 @@ import CompraInfo from "../Compras/Compra";
 import EstablecerEncuentro from "../Compras/EstablecerEncuentro";
 import ListarEncuentros from "../Compras/ListarEncuentros";
 import AgregarUsuario from "../AgregarUsuario/AgregarUsuario"
+import EliminarProducto from "../EliminarProducto/EliminarProd";
 //Main con rutas de navegacion y sus respectivos componentes 
 const Main = () => {
 
@@ -26,6 +27,7 @@ const Main = () => {
                 <Route path="/modificarproducto/:id" Component={ModificarProductos}></Route>
                 <Route path="/productos" Component={Consultar_Producto}></Route>
                 <Route path="/productos/producto/:id_producto" Component={Producto_Individual}></Route>
+                <Route path="/productos/eliminar/:id_producto" Component={EliminarProducto}></Route>
                 <Route path="/AgregarProducto" Component={AgregarProducto}/>
                 <Route path="/compras/:id" element={<ListarCompras />} />
                 <Route path="/compra/:id" element={<CompraInfo />} />

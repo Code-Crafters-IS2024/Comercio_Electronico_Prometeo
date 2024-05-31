@@ -1,25 +1,68 @@
-.prod_form
-{
-    width: 370px;
+
+
+.add-product-section h2 {
+    margin-bottom: 20px;
+}
+
+.prod_form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin: auto;
-
-    padding: 10px;
-    box-shadow: 3px 3px 3px lightgray;
+    align-items: center;
+    width: 100%;
+    max-width: 500px; /* Max width of the form */
 }
-.prod_field
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items:flex-start;
-    margin: 15px;
 
-    font-size: large;
+.prod_field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+#file{
+    border: none;
+}
+
+.prod_field label {
+    margin-bottom: 5px;
+}
+
+.prod_field textarea,
+.prod_field input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    max-height: 40px;
+    text-align: center;
+}
+
+.prod_field textarea {
+    max-height: 100px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #218838;
 }
 
 textarea {
     resize: none;
-  }
+}
+
+.add-product-section
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

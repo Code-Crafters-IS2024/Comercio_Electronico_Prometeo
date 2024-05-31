@@ -31,8 +31,11 @@ form input, form select {
     width: 100%;
 }
 
+
+
 form input[type="file"] {
     padding: 3px;
+    border: none;
 }
 
 form button {

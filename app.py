@@ -47,15 +47,15 @@ def login():
     passwd = request.form.get('password')
     typeOfUser = request.form.get('usertype')
 
-    authenticated = False
+    authenticated = None
 
     if typeOfUser == "vendedor":
         authenticated = authenticate_seller(name, passwd)
     elif typeOfUser == "comprador":
         authenticated = authenticate_buyer(name, passwd)
 
-    if authenticated:
-        session['user_id'] = name  # definición de cookie de sesión.
+    if authenticated is not None:
+        session['user_id'] = authenticated  # definición de cookie de sesión.
         session['user_type'] = typeOfUser
         return jsonify({
             "logged": True,
@@ -87,9 +87,9 @@ def add_product():
         data = request.form
         foto = request.files['foto'].read() if 'foto' in request.files else None
         num_cuenta = session['user_id']
-        if ModeloVendedor.obtener_vendedor_cuenta(num_cuenta) == None:
+        if ModeloVendedor.obtener_vendedor(num_cuenta) == None:
             return jsonify({"message": "No existe el vendedor"}), 201
-        id_vendedor = ModeloVendedor.obtener_vendedor_cuenta(num_cuenta).id_vendedor
+        id_vendedor = ModeloVendedor.obtener_vendedor(num_cuenta).id_vendedor
         ModeloProducto.agregar_producto(data, foto, id_vendedor)
         return jsonify({"message": "Producto agregado con éxito"}), 201
     return jsonify({"message": "Producto no agregado con éxito"}), 201
@@ -105,13 +105,10 @@ def view_prods():
         return jsonify({"message":"Por favor inicia sesion"}),403
     
     if session['user_type'] == "vendedor":
-        print("vendedir")
-        id_vendedor = ModeloVendedor.obtener_vendedor_cuenta(session['user_id']).id_vendedor
+        id_vendedor = ModeloVendedor.obtener_vendedor(session['user_id']).id_vendedor
         data = ModeloProducto.productos_vendedor(id_vendedor)
     elif session['user_type'] == "comprador":
-        print("Comprador")
         data = Producto.query.all()
-    print(data)
     if not data:
         return jsonify({"message" : "No hay productos registrados", "data" : None}), 404
         
@@ -157,6 +154,8 @@ def get_prod():
         data["vendedor"] = dict_vendedor
 
         dict_prod = {}
+        dict_prod["id_producto"] = data_producto.id_producto
+        dict_prod["id_vendedor"] = data_producto.id_vendedor
         dict_prod["descripcion"] = data_producto.descripcion
         dict_prod["costo"] = data_producto.costo
         dict_prod["unidades"] = data_producto.unidades
@@ -176,8 +175,16 @@ Borra un producto y todas las reseñas asociadas con el
 """
 @app.route("/api/producto/eliminar", methods=['GET'])
 def eliminar_producto():
+    if session.get('user_id') == None or session.get('user_type') == None:
+        return jsonify({"message": "Debes iniciar sesion"}), 403
+    if session['user_type'] != "vendedor":
+        return jsonify({"message": "Debes ser un vendedor para eliminar productos"}), 403
     try:
         id_producto = request.args.get("id_producto")
+        producto = ModeloProducto.obtener_producto(id_producto)
+        
+        if session['user_id'] != producto.id_vendedor:
+            return jsonify({"message": "No puedes eliminar este producto"}), 404
         ModeloProducto.delete_product(id_producto)
     except Exception as e:
         print(e)
@@ -313,6 +320,7 @@ def get_product(id):
             'id': product.id_producto,
             'id_vendedor': product.id_vendedor,
             'descripcion': product.descripcion,
+            'nombre' : product.nombre,
             'costo': product.costo,
             'categoria': product.categoria,
             'unidades': product.unidades,
@@ -324,7 +332,7 @@ def get_product(id):
 @app.route('/api/get_compras/<int:id_vendedor>', methods=['GET', 'POST'])
 def get_compras(id_vendedor):
     #print("Obteniendo compras")
-    id_vendedor = ModeloVendedor.obtener_vendedor_cuenta(id_vendedor).id_vendedor
+    id_vendedor = ModeloVendedor.obtener_vendedor(id_vendedor).id_vendedor
     compras = ModeloCompra.obtener_compras(id_vendedor)
     #print(compras)
     return jsonify([ModeloCompra.to_dict(compra) for compra in compras]), 200
@@ -369,5 +377,26 @@ def agregar_usuario():
         else:
             return jsonify({"success": False, "message": "Numero de cuenta ya existente"}), 202
     return jsonify({"success": False, "message": "Error al registrar el usuario"}), 400
+
+"""Agrega registro de compra para un producto dado"""
+@app.route("/api/comprar/agregar", methods=['POST'])
+def agregar_compra():
+    data = {}
+    try:
+        data["id_comprador"] = session['user_id']
+        data["id_vendedor"] = request.form.get("id_vendedor")
+        data["id_producto"] = request.form.get("id_producto")
+        data["total"] = request.form.get("total")
+        data["fecha"] = request.form.get("fecha")
+
+        if ModeloProducto.restar_unidades(request.form.get("id_producto"), request.form.get("unidades")):
+            ModeloCompra.agregar_compra(data)
+        
+        else:
+            return jsonify({"message":"Sobrepasa inventario"}), 403
+    except Exception as e:
+        print(e)
+    return jsonify({"message":"Operacion exitosa"}), 201
+
 if __name__ == '__main__':
     app.run()
