@@ -59,6 +59,7 @@ class ModeloVendedor():
     def obtener_vendedor_cuenta(num_cuenta):
         data = Vendedor.query.filter_by(numero_cuenta=num_cuenta).first()
         return data
+
     def obtener_vendedores():
         try:
             data = Vendedor.query.all()

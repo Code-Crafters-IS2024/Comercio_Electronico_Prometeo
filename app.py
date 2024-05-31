@@ -47,15 +47,15 @@ def login():
     passwd = request.form.get('password')
     typeOfUser = request.form.get('usertype')
 
-    authenticated = False
+    authenticated = None
 
     if typeOfUser == "vendedor":
         authenticated = authenticate_seller(name, passwd)
     elif typeOfUser == "comprador":
         authenticated = authenticate_buyer(name, passwd)
 
-    if authenticated:
-        session['user_id'] = name  # definición de cookie de sesión.
+    if authenticated is not None:
+        session['user_id'] = authenticated  # definición de cookie de sesión.
         session['user_type'] = typeOfUser
         return jsonify({
             "logged": True,

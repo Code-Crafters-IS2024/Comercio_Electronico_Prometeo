@@ -57,8 +57,13 @@ class ModeloComprador():
         return True
 
     def obtener_comprador(id_comprador):
-        data = Comprador.query.filter_by(numero_cuenta=id_comprador).first()
+        data = Comprador.query.filter_by(id_comprador=id_comprador).first()
         return data
+    
+    def obtener_comprador_cuenta(num_cuenta):
+        data = Comprador.query.filter_by(numero_cuenta=num_cuenta).first()
+        return data
+
 
     def obtener_compradores():
         try:
