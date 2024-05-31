@@ -321,6 +321,7 @@ def get_product(id):
             'id': product.id_producto,
             'id_vendedor': product.id_vendedor,
             'descripcion': product.descripcion,
+            'nombre' : product.nombre,
             'costo': product.costo,
             'categoria': product.categoria,
             'unidades': product.unidades,

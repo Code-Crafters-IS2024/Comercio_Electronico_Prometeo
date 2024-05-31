@@ -78,7 +78,7 @@ const ModificarProducto = () => {
                     <input
                         type="number"
                         name="id_vendedor"
-                        value={formData.id_vendedor}
+                        defaultValue={formData.id_vendedor}
                         onChange={handleChange}
                         required
                     />
@@ -88,7 +88,7 @@ const ModificarProducto = () => {
                     <input
                         type="text"
                         name="nombre"
-                        value={formData.nombre}
+                        defaultValue={formData.nombre}
                         onChange={handleChange}
                         required
                     />
@@ -98,7 +98,7 @@ const ModificarProducto = () => {
                     <input
                         type="text"
                         name="descripcion"
-                        value={formData.descripcion}
+                        defaultValue={formData.descripcion}
                         onChange={handleChange}
                         required
                     />
@@ -108,7 +108,7 @@ const ModificarProducto = () => {
                     <input
                         type="number"
                         name="costo"
-                        value={formData.costo}
+                        defaultValue={formData.costo}
                         onChange={handleChange}
                         required
                     />
@@ -118,7 +118,7 @@ const ModificarProducto = () => {
                     <input
                         type="text"
                         name="categoria"
-                        value={formData.categoria}
+                        defaultValue={formData.categoria}
                         onChange={handleChange}
                         required
                     />
