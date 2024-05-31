@@ -112,7 +112,13 @@ class ModeloProducto():
     
     def restar_unidades(id_producto, total):
         producto = Producto.query.get(id_producto)
+        
+        if(producto.unidades < total):
+            return False
+        
         producto.unidades -= int(total)
         db.session.commit()
+
+        return True
         
     

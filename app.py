@@ -383,11 +383,13 @@ def agregar_compra():
         data["total"] = request.form.get("total")
         data["fecha"] = request.form.get("fecha")
 
-        ModeloCompra.agregar_compra(data)
-        ModeloProducto.restar_unidades(request.form.get("id_producto"), request.form.get("unidades"))
+        if ModeloProducto.restar_unidades(request.form.get("id_producto"), request.form.get("unidades")):
+            ModeloCompra.agregar_compra(data)
+        
+        else:
+            return jsonify({"message":"Sobrepasa inventario"}), 403
     except Exception as e:
         print(e)
-        return jsonify({"message":"Algo salio mal: " + str(e)}), 401
     return jsonify({"message":"Operacion exitosa"}), 201
 
 if __name__ == '__main__':
