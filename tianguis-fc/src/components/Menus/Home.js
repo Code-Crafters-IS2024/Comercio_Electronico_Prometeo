@@ -20,11 +20,7 @@ const Home = () =>
 
 	  return (
 		  <div>
-		  Estas logeado como {logStatus.type}!!
-		  <a href="/logout">Cerrar sesión</a>
-		  <a href="/AgregarProducto">Agregar Producto</a>
-		  <Link to={`/compras/${idVendedor}`}>Listar Compras</Link>
-		  <Link to={`/ver_encuentros/${idVendedor}`}>Listar Encuentros</Link>
+		  <h1>Bienvenido a Comercio Electrónico Prometeo</h1>
 		  </div>);
 
       }

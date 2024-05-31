@@ -69,7 +69,7 @@ const CrearResena = ({id_producto}) =>
     }
 
     //Si hay una reseña escrita por el usuario, usar sus valores en el forms. de otro modo usar placeholders
-    const defaultComentario = data.data ? {defaultValue : data.data.comentario} : { placeholder : "Escribe aqui lo que piensas de este prducto"}
+    const defaultComentario = data.data ? {defaultValue : data.data.comentario} : { placeholder : "Escribe aqui lo que piensas de este producto"}
     const defaultCalificacion = data.data ? {defaultValue : data.data.calificacion} : { placeholder: 3}
 
         return(

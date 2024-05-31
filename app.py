@@ -74,7 +74,8 @@ def logout():
     session['user_id'] = None
     session['user_type'] = None
     return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
 @app.route('/api/add_product', methods=['POST'])
 def add_product():
@@ -100,7 +101,7 @@ def view_prods():
     
     if session['user_type'] == "vendedor":
         data = ModeloProducto.productos_vendedor(session['user_id'])
-    elif session['user_type'] == "Comprador":
+    elif session['user_type'] == "comprador":
         data = Producto.query.all()
     
     if not data:
