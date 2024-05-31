@@ -21,7 +21,7 @@ const Consultar_Producto = () =>
 
   if(login == null)
   {
-    return null;
+    return <h1>Login null</h1>;
   }
 
   if(!login.logged)
@@ -31,27 +31,31 @@ const Consultar_Producto = () =>
 
   //Cambiar por chequeo para determinar tipo de usuario
   let esVendedor = login.type == "vendedor";
-  
+
   if(data == null)
   {
-    console.log("No hay datos")
-    return null
+    return <h1>No hay productos</h1>
   }
 
   let productos = data.data
-
   if(productos == null)
   {
-    return null;
+    return <h1>No hay nada por aqui</h1>;
   }
 
+  console.log(data)
+
   return(
+    <div>
+      {login.type == "vendedor" &&
+     <div className="productos-grid"><a href="/AgregarProducto" className="product-nav-button comprar">Agregar Producto</a></div>}
     <div className="productos-grid">
       {Object.keys(productos).map((key) => (
         <div key={key}>
           <CardProduct data={productos[key]} id={key} esVendedor={esVendedor}/>
         </div>
       ))}
+    </div>
     </div>
   )
 }

@@ -87,7 +87,18 @@ Obtiene la informacion simplificada de todos los productos
 """
 @app.route("/api/view_prods")
 def view_prods():
-    data = Producto.query.all()
+    data = None
+    if session.get('user_id') == None:
+        return jsonify({"message":"Por favor inicia sesion"}),403
+    
+    if session['user_type'] == "vendedor":
+        data = ModeloProducto.productos_vendedor(session['user_id'])
+    elif session['user_type'] == "Comprador":
+        data = Producto.query.all()
+    
+    if not data:
+        return jsonify({"message" : "No hay productos registrados", "data" : None}), 404
+        
     dict = {}
     for d in data:
         prod_data = {}

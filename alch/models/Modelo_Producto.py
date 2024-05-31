@@ -110,3 +110,12 @@ class ModeloProducto():
         data = Producto.query.filter_by(id_producto=id_producto).first()
         return data
     
+    """Obtener la lista de los productos que un vendedor vende"""
+    def productos_vendedor(id_vendedor):
+        data = None
+        try:
+            data = Producto.query.filter_by(id_vendedor=id_vendedor).all()
+        except Exception as e:
+            print(e)
+        return data
+    

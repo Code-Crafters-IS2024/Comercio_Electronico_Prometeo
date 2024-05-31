@@ -12,7 +12,6 @@ const LoginStatus = () => {
           .then(data => setData(data))
           .catch(error => console.error('Error fetching data:', error));
   }, []);
-  console.log(data);
   return data;
   };
 
