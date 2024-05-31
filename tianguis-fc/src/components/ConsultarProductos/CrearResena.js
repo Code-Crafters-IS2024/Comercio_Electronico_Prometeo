@@ -26,7 +26,7 @@ const CrearResena = ({id_producto}) =>
     //FUnciones de form
 
     async function sendFormData(formData) {
-        let direction = data.data ? `/api/resena/modificar` : 'api/resena/agregar'
+        let direction = data.data ? `/api/resena/modificar` : '/api/resena/agregar'
         await fetch(direction, {
           method: 'POST',
           body: formData
