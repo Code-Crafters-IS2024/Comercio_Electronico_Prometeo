@@ -32,61 +32,75 @@ def hello_world():
 
 @app.route('/api/login', methods=['GET','POST'])
 def login():
-    if session.get('user_id') != None:
+    if session.get('user_id') != None and session.get('user_type') != None:
         return jsonify({
             "logged" : True,
-            "user" : session['user_id']
+            "user" : session['user_id'],
+            "type" : session['user_type']
             })
     if request.method == 'GET':
         return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
     name = request.form.get('username')
     passwd = request.form.get('password')
-    if authenticate_user(name, passwd):
+    typeOfUser = authenticate_user(name, passwd)
+    if typeOfUser is not None:
 
         session['user_id'] = name #definición de cookie de sesión.
+        session['user_type'] = typeOfUser
         return jsonify({
             "logged" : True,
-            "user" : session['user_id']
+            "user" : session['user_id'],
+            "type" : session['user_type']
             })
 
     else:
         return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
     
 
 @app.route('/api/logout')
 def logout():
     session['user_id'] = None
+    session['user_type'] = None
     return jsonify({"logged" : False,
-                "user" : None})
+                "user" : None,
+                "type" : None})
 
 @app.route('/api/add_product', methods=['POST'])
 def add_product():
     if request.method == 'POST':
         data = request.form
         foto = request.files['foto'].read() if 'foto' in request.files else None
+        id_vendedor = data.get('id_vendedor')
+        if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
+            return jsonify({"message": "No existe el vendedor"}), 201
+        ModeloProducto.agregar_producto(data, foto)
+        return jsonify({"message": "Producto agregado con éxito"}), 201
+    return jsonify({"message": "Producto no agregado con éxito"}), 201
 
-        new_product = Producto(
-            id_vendedor=data.get('id_vendedor'),
-            descripcion=data.get('descripcion'),
-            costo=data.get('costo'),
-            categoria=data.get('categoria'),
-            #foto=foto,
-            unidades=data.get('unidades')
-        )
-
-        ModeloProducto.agregar(new_product)
-        return jsonify({"message": "Producto agregado con éxito", "product": new_product.id_producto}), 201
     
 """
 Obtiene la informacion simplificada de todos los productos
 """
 @app.route("/api/view_prods")
 def view_prods():
-    data = Producto.query.all()
+    data = None
+    if session.get('user_id') == None:
+        return jsonify({"message":"Por favor inicia sesion"}),403
+    
+    if session['user_type'] == "vendedor":
+        data = ModeloProducto.productos_vendedor(session['user_id'])
+    elif session['user_type'] == "comprador":
+        data = Producto.query.all()
+    
+    if not data:
+        return jsonify({"message" : "No hay productos registrados", "data" : None}), 404
+        
     dict = {}
     for d in data:
         prod_data = {}
@@ -153,7 +167,7 @@ def eliminar_producto():
     return jsonify({"message": "Reseña eliminada exitosamente"}), 201
 
 """
-Obtiene la informacion simplificada de todos los productos
+Obtiene las reseñas de un producto
 """
 @app.route("/api/view_resenas_prod", methods=['GET'])
 def view_resenas_prod():
@@ -236,6 +250,7 @@ def obtener_resena_comprador_producto():
         return jsonify({"message":str(e), "data":None}), 404
     return jsonify({"message" : "Reseña consultada exitosamente", "data":data}), 201
 
+"""API para eliminar una reseña"""
 @app.route("/api/resena/eliminar", methods=['GET'])
 def eliminar_resena():
     try:
@@ -247,6 +262,7 @@ def eliminar_resena():
     
     return jsonify({"message" : "Reseña eliminada exitosamente"}), 201
 
+"""API para modificar una reseña"""
 @app.route("/api/resena/modificar", methods=['POST'])
 def modificar_resena():
     try:
@@ -260,13 +276,6 @@ def modificar_resena():
         return jsonify({"message":str(e)}), 401
     
     return jsonify({"message" : "Reseña modificada exitosamente"}), 201
-
-        id_vendedor = data.get('id_vendedor')
-        if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
-            return jsonify({"message": "No existe el vendedor"}), 201
-        ModeloProducto.agregar_producto(data, foto)
-        return jsonify({"message": "Producto agregado con éxito"}), 201
-    return jsonify({"message": "Producto no agregado con éxito"}), 201
 
 @app.route('/api/update_product/<int:id>', methods=['POST'])
 def update_product(id):

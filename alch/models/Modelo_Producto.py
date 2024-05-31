@@ -41,7 +41,7 @@ class ModeloProducto():
                 db.session.delete(resena)
                 db.session.commit()
             except Exception as e:
-            print("Algo salió mal al eliminar el registro de alguna reseña asociada al producto: " + str(e))
+                print("Algo salió mal al eliminar el registro de alguna reseña asociada al producto: " + str(e))
             return False
         # Una vez hacemos eso podemos borrar el producto
         producto = Producto.query.get(id_producto)
@@ -108,5 +108,14 @@ class ModeloProducto():
         return True
     def obtener_producto(id_producto):
         data = Producto.query.filter_by(id_producto=id_producto).first()
+        return data
+    
+    """Obtener la lista de los productos que un vendedor vende"""
+    def productos_vendedor(id_vendedor):
+        data = None
+        try:
+            data = Producto.query.filter_by(id_vendedor=id_vendedor).all()
+        except Exception as e:
+            print(e)
         return data
     
