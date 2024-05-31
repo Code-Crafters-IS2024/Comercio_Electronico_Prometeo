@@ -47,6 +47,7 @@ CREATE TABLE comprador(
 CREATE TABLE producto(
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
     id_vendedor INT NOT NULL,
+    nombre varchar(20) NOT NULL,
     descripcion varchar(300) NOT NULL,
     costo DECIMAL(6,2) NOT NULL,
     categoria varchar(100) NOT NULL,
