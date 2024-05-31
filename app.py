@@ -154,6 +154,8 @@ def get_prod():
         data["vendedor"] = dict_vendedor
 
         dict_prod = {}
+        dict_prod["id_producto"] = data_producto.id_producto
+        dict_prod["id_vendedor"] = data_producto.id_vendedor
         dict_prod["descripcion"] = data_producto.descripcion
         dict_prod["costo"] = data_producto.costo
         dict_prod["unidades"] = data_producto.unidades
@@ -369,5 +371,26 @@ def agregar_usuario():
         if ModeloVendedor.agregar_vendedor(data, profile_picture):
             return jsonify({"success": True, "message": "Vendedor registrado exitosamente"}), 201
     return jsonify({"success": False, "message": "Error al registrar el usuario"}), 400
+
+"""Agrega registro de compra para un producto dado"""
+@app.route("/api/comprar/agregar", methods=['POST'])
+def agregar_compra():
+    data = {}
+    try:
+        data["id_comprador"] = session['user_id']
+        data["id_vendedor"] = request.form.get("id_vendedor")
+        data["id_producto"] = request.form.get("id_producto")
+        data["total"] = request.form.get("total")
+        data["fecha"] = request.form.get("fecha")
+
+        if ModeloProducto.restar_unidades(request.form.get("id_producto"), request.form.get("unidades")):
+            ModeloCompra.agregar_compra(data)
+        
+        else:
+            return jsonify({"message":"Sobrepasa inventario"}), 403
+    except Exception as e:
+        print(e)
+    return jsonify({"message":"Operacion exitosa"}), 201
+
 if __name__ == '__main__':
     app.run()

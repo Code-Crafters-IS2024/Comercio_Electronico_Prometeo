@@ -180,3 +180,17 @@
     flex-direction: column;
     margin-right: 50px;
 }
+
+/** Comprar */
+
+.prod-buy
+{
+    display: flex;
+    flex-direction: row-reverse;
+    column-gap: 10px;
+}
+
+.prod-cantidad
+{
+    width: 50px;
+}

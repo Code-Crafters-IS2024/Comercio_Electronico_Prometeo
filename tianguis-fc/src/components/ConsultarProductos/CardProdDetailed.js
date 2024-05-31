@@ -1,3 +1,4 @@
+import ComprarProd from "./ComprarProd"
 
 /**
  * 
@@ -48,7 +49,7 @@ const CardProdDetailed = ({data, id, esVendedor}) =>
                 {esVendedor?
                     <a href={`/modificarproducto/${id}`} className="product-nav-button modificar">Modificar</a>
                     :
-                    <a href="" className="product-nav-button comprar">Comprar</a>
+                    <ComprarProd data={data.producto}/>
                 }
                 </div>
             </div>
