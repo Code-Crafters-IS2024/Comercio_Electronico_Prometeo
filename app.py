@@ -5,6 +5,10 @@ from alch.alchemyClasses.resena import Resena
 from alch.models.Modelo_Vendedor import ModeloVendedor
 from alch.models.Modelo_Resena import ModeloResena
 from alch.models.Modelo_Comprador import ModeloComprador
+from alch.models.Modelo_Vendedor import ModeloVendedor
+from alch.models.Modelo_Compra import ModeloCompra
+from alch.models.Modelo_Encuentro import ModeloEncuentro
+
 from controller.catalogue import catalogue
 from authenticate import authenticate_user
 
@@ -257,6 +261,65 @@ def modificar_resena():
     
     return jsonify({"message" : "Reseña modificada exitosamente"}), 201
 
+        id_vendedor = data.get('id_vendedor')
+        if ModeloVendedor.obtener_vendedor(id_vendedor) == None:
+            return jsonify({"message": "No existe el vendedor"}), 201
+        ModeloProducto.agregar_producto(data, foto)
+        return jsonify({"message": "Producto agregado con éxito"}), 201
+    return jsonify({"message": "Producto no agregado con éxito"}), 201
+
+@app.route('/api/update_product/<int:id>', methods=['POST'])
+def update_product(id):
+    data = request.form
+    foto = request.files['foto'].read() if 'foto' in request.files else None
+    if ModeloProducto.modificar_producto(id, data, foto):
+        return jsonify({"message": "Producto actualizado con éxito"}), 201
+    return jsonify({"message": "Error al actualizar el producto"}), 400
+
+@app.route('/api/get_product/<int:id>', methods=['GET'])
+def get_product(id):
+    product = ModeloProducto.obtener_producto(id)
+    if product:
+        product_data = {
+            'id': product.id_producto,
+            'id_vendedor': product.id_vendedor,
+            'descripcion': product.descripcion,
+            'costo': product.costo,
+            'categoria': product.categoria,
+            'unidades': product.unidades,
+            'foto': product.imagen.decode('latin1') if product.imagen else None
+        }
+        return jsonify(product_data), 200
+    return jsonify({"message": "Producto no encontrado"}), 404
+
+@app.route('/api/get_compras/<int:id_vendedor>', methods=['GET', 'POST'])
+def get_compras(id_vendedor):
+    #print("Obteniendo compras")
+    compras = ModeloCompra.obtener_compras(id_vendedor)
+    #print(compras)
+    return jsonify([ModeloCompra.to_dict(compra) for compra in compras]), 200
+
+@app.route('/api/get_compra/<int:id>', methods=['GET'])
+def get_compra(id):
+    print("GET COMPRA")
+    compra = ModeloCompra.obtener_compra(id)
+    if compra:
+        return jsonify(ModeloCompra.to_dict(compra)), 200
+    return jsonify({"message": "Compra no encontrada"}), 404
+
+@app.route('/api/crear_encuentro', methods=['POST'])
+def crear_encuentro():
+    data = request.json
+    print(data)
+    if ModeloEncuentro.crear_encuentro(data):
+        return jsonify({"message": "Encuentro creado con éxito"}), 201
+    return jsonify({"message": "Error al crear el encuentro"}), 400
+
+@app.route('/api/get_encuentros/<int:id>', methods=['GET'])
+def get_encuentros(id):
+    print("encuentros por id: ", id)
+    encuentros = ModeloEncuentro.obtener_encuentros(id)
+    return jsonify([ModeloEncuentro.to_dict(encuentro) for encuentro in encuentros]), 200
 
 if __name__ == '__main__':
     app.run()

@@ -80,6 +80,7 @@ CREATE TABLE resena(
 -- finalmente creamos la tabla con referencias en su llave compuesta
 
 CREATE TABLE encuentro(
+    id_encuentro INT AUTO_INCREMENT PRIMARY KEY,	
     id_comprador INT NOT NULL,
     id_vendedor INT NOT NULL,
     id_compra INT NOT NULL,
