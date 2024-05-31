@@ -95,7 +95,7 @@ def view_prods():
     
     if session['user_type'] == "vendedor":
         data = ModeloProducto.productos_vendedor(session['user_id'])
-    elif session['user_type'] == "Comprador":
+    elif session['user_type'] == "comprador":
         data = Producto.query.all()
     
     if not data:
