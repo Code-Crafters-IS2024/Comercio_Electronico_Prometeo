@@ -113,20 +113,24 @@ def view_prods():
         return jsonify({"message" : "No hay productos registrados", "data" : None}), 404
         
     dict = {}
-    for d in data:
-        prod_data = {}
-        
-        id_vendedor = d.id_vendedor
-        vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
+    try:
+        for d in data:
+            prod_data = {}
+            
+            id_vendedor = d.id_vendedor
+            vendedor = ModeloVendedor.obtener_vendedor(id_vendedor)
 
-        prod_data["id_producto"] = d.id_producto
-        prod_data["vendedor"] = vendedor.nombres
-        prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
-        prod_data["precio"] = d.costo
-        prod_data["unidades"] = d.unidades
-        prod_data["nombre"] = "Nombre de Producto"
+            prod_data["id_producto"] = d.id_producto
+            prod_data["vendedor"] = vendedor.nombres
+            prod_data["calificacion"] = ModeloProducto.calificacion_promedio(d.id_producto)
+            prod_data["precio"] = d.costo
+            prod_data["unidades"] = d.unidades
+            prod_data["nombre"] = d.nombre
 
-        dict[d.id_producto] = prod_data
+            dict[d.id_producto] = prod_data
+    except Exception as e:
+        print(e)
+        return jsonify({"message":"Algo salio mal" + str(e), "data":None}), 404
     return jsonify({"message":"Productos consultados exitosamente", "data":dict}), 201
 
 """
@@ -156,7 +160,7 @@ def get_prod():
         dict_prod["unidades"] = data_producto.unidades
         dict_prod["calificacion"] = ModeloProducto.calificacion_promedio(id_producto)
         dict_prod["categoria"] = data_producto.categoria
-        dict_prod["nombre"] = "Nombre de Producto"
+        dict_prod["nombre"] = data_producto.nombre
 
         data["producto"] = dict_prod
     except Exception as e:
